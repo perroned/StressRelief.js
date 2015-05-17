@@ -1,15 +1,19 @@
 class @Tool
-  icon = null
-  shadow = null
   damageIconCount = 0
+  icon = null
+  pressed = false
+  shadow = null
   constructor: (@name) ->
-  doAction: ->
+  actionStart: -> pressed = true
+  actionFinish: -> pressed = false
   getName: -> @name
+  isPressed: -> pressed
   loadTool: ->
   showShadow: ->
   showTool: ->
   switchOff: -> @shadow.visible = @icon.visible = false
   switchOn: -> @shadow.visible = @icon.visible = true
+
 
 @changeTool = (selection) ->
   App.tools[App.currentTool].switchOff()
