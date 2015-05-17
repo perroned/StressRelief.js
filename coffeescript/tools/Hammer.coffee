@@ -37,3 +37,9 @@ class @Hammer extends @Tool
     @icon.position.y = mCoords.y
     @icon.position.x = mCoords.x
     @showShadow(mCoords)
+
+  switchOff: ->
+    super()
+
+  switchOn: ->
+    super()
