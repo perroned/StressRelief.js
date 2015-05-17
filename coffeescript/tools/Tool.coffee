@@ -1,3 +1,20 @@
+class @Tool
+  icon = null
+  damageIconCount = 0
+  constructor: (@name) ->
+  doAction: ->
+  getName: -> @name
+  loadTool: ->
+  showShadow: ->
+  showTool: ->
+
+@cleanupDamage = ->
+  j = 0
+  while j < App.tools.damages.length
+    App.pondContainer.removeChild(App.tools.damages[j])
+    j++
+  App.tools.damages = []
+
 @setupTools = ->
   App.tools = []
   App.tools.push (new Hammer "Hammer")
@@ -8,13 +25,3 @@
 
 @showTool = ->
   App.tools[App.currentTool].showTool()
-
-class @Tool
-  icon = null
-  damageIconCount = 0
-  constructor: (@name) ->
-  doAction: ->
-  getName: -> @name
-  loadTool: ->
-  showShadow: ->
-  showTool: ->
