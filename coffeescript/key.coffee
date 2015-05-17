@@ -32,12 +32,5 @@ App.keyboard = (keyCode) ->
   key
 
 App.registerKeys = ->
-  keyObject = App.keyboard(65);
-  keyObject.press = ->
-    # Create the `cat` sprite
-    texture = PIXI.TextureCache["images/displacement_fish1.png"];
-    cat = new PIXI.Sprite(texture);
-    cat.y = 96;
-    cat.vx = 0;
-    cat.vy = 0;
-    App.stage.addChild(cat);
+  App.keyboard(49).press = -> changeTool(0)
+  App.keyboard(50).press = -> changeTool(1)
