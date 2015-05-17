@@ -1,22 +1,9 @@
 @setupHitbox = ->
   hitBox = new PIXI.Graphics();
-  # damageHolder = []
   hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
   hitBox.interactive = true;
   hitBox.mousedown = (e) ->
-    # if damageHolder.length >= 5
-    #   j = 0
-    #   while j < damageHolder.length
-    #     pondContainer.removeChild(damageHolder[j])
-    #     j++
-    #   damageHolder = []
-    c = App.stage.getMousePosition()
-    damage = PIXI.Sprite.fromImage("images/logo_small.png")
-    damage.scale.x = damage.scale.y = 1
-    damage.position.x = c.x
-    damage.position.y = c.y
-    App.stage.addChild(damage);
-    # damageHolder.push damage
+    App.tools[App.currentTool].doAction()
 
   App.stage.addChild hitBox
 
