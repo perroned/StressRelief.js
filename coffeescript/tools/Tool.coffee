@@ -1,5 +1,6 @@
 class @Tool
   icon = null
+  shadow = null
   damageIconCount = 0
   constructor: (@name) ->
   doAction: ->
