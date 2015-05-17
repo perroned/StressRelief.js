@@ -1,0 +1,63 @@
+@setupHitbox = ->
+  hitBox = new PIXI.Graphics();
+  # damageHolder = []
+  hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+  hitBox.interactive = true;
+  hitBox.mousedown = (e) ->
+    # if damageHolder.length >= 5
+    #   j = 0
+    #   while j < damageHolder.length
+    #     pondContainer.removeChild(damageHolder[j])
+    #     j++
+    #   damageHolder = []
+    c = App.stage.getMousePosition()
+    damage = PIXI.Sprite.fromImage("images/logo_small.png")
+    damage.scale.x = damage.scale.y = 1
+    damage.position.x = c.x
+    damage.position.y = c.y
+    App.stage.addChild(damage);
+    # damageHolder.push damage
+
+  App.stage.addChild hitBox
+
+@setupFish = ->
+  App.fishs = []
+  i = 0
+  while i < 20
+    fishId = i % 4
+    fishId += 1
+    fish = PIXI.Sprite.fromImage('images/displacement_fish' + fishId + '.png')
+    fish.anchor.x = fish.anchor.y = 0.5
+    App.pondContainer.addChild fish
+    fish.direction = Math.random() * Math.PI * 2
+    fish.speed = .3
+    fish.turnSpeed = Math.random() - 0.8
+    fish.position.x = Math.random() * App.bounds.width
+    fish.position.y = Math.random() * App.bounds.height
+    fish.scale.x = fish.scale.y = .2
+    App.fishs.push fish
+    i++
+  overlay = new (PIXI.TilingSprite)(PIXI.Texture.fromImage('images/zeldaWaves.png'), 630, 410)
+  overlay.alpha = 0.1
+  App.pondContainer.addChild overlay
+
+@setupScene = ->
+  setupRenderer()
+  # create an new instance of a pixi stage
+  App.stage = new (PIXI.Stage)(0xFF0000, true)
+  App.pondContainer = new (PIXI.DisplayObjectContainer)
+  App.stage.addChild App.pondContainer
+  App.stage.interactive = true
+  bg = PIXI.Sprite.fromImage('images/displacement_BG.jpg')
+  App.pondContainer.addChild bg
+  padding = 100
+  App.bounds = new (PIXI.Rectangle)(-padding, -padding, 630 + padding * 2, 410 + padding * 2)
+
+@setupRenderer = ->
+  App.renderer = PIXI.autoDetectRenderer(630, 410)
+  App.renderer.view.style.position = 'absolute'
+  App.renderer.view.style.width = window.innerWidth + 'px'
+  App.renderer.view.style.height = window.innerHeight + 'px'
+  App.renderer.view.style.display = 'block'
+  # add render view to DOM
+  document.body.appendChild App.renderer.view

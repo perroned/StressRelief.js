@@ -30,3 +30,14 @@ App.keyboard = (keyCode) ->
   window.addEventListener 'keydown', key.downHandler.bind(key), false
   window.addEventListener 'keyup', key.upHandler.bind(key), false
   key
+
+App.registerKeys = ->
+  keyObject = App.keyboard(65);
+  keyObject.press = ->
+    # Create the `cat` sprite
+    texture = PIXI.TextureCache["images/displacement_fish1.png"];
+    cat = new PIXI.Sprite(texture);
+    cat.y = 96;
+    cat.vx = 0;
+    cat.vy = 0;
+    App.stage.addChild(cat);
