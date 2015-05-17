@@ -6,12 +6,12 @@
   gui = new (dat.GUI)({})
   setupScene()
   setupFish()
-  setupWeapon()
+  setupTools()
   setupHitbox();
 
   @animate = ->
     animateFish()
-    showWeapon()
+    showTool()
     App.renderer.render App.stage
     requestAnimFrame animate
     return
