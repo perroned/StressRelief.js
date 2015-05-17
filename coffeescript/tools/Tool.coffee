@@ -3,6 +3,7 @@ class @Tool
   icon = null
   pressed = false
   shadow = null
+
   constructor: (@name) ->
   actionStart: -> pressed = true
   actionFinish: -> pressed = false
@@ -13,7 +14,6 @@ class @Tool
   showTool: ->
   switchOff: -> @shadow.visible = @icon.visible = false
   switchOn: -> @shadow.visible = @icon.visible = true
-
 
 @changeTool = (selection) ->
   App.tools[App.currentTool].switchOff()

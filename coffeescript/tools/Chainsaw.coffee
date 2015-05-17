@@ -2,7 +2,11 @@ class @Chainsaw extends @Tool
   constructor: (@name) ->
     super @name
 
-  doAction: ->
+  actionStart: ->
+    super()
+
+  actionFinish: ->
+    super()
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("images/tools/tools/chainsaw.png")

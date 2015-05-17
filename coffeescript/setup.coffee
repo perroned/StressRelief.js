@@ -1,11 +1,12 @@
 @setupHitbox = ->
   hitBox = new PIXI.Graphics();
+  App.stage.addChild hitBox
   hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
   hitBox.interactive = true;
   hitBox.mousedown = (e) ->
-    App.tools[App.currentTool].doAction()
-
-  App.stage.addChild hitBox
+    App.tools[App.currentTool].actionStart()
+  hitBox.mouseup = (e) ->
+    App.tools[App.currentTool].actionFinish()
 
 @setupFish = ->
   App.fishs = []
