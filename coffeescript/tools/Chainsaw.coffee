@@ -61,7 +61,6 @@ class @Chainsaw extends @Tool
 
   switchOn: ->
     super()
-    App?.sound?.stop?()
     App.sound = new Howl({
       urls: ['resources/sounds/chainsaw_rev.ogg']
       loop: true
