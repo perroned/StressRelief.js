@@ -1,5 +1,4 @@
 class @Hammer extends @Tool
-  pressed = false
   constructor: (@name) ->
     super @name
     @damageIconCount = 3
