@@ -1,60 +1,47 @@
 class @Machinegun extends @Tool
   constructor: (@name) ->
     super @name
-    # @cutIcon = null
 
   actionStart: ->
     super()
-    @switchOff()
-    # App.sound = new Howl({
-    #   urls: ['resources/sounds/chainsaw_cut.ogg']
-    #   loop: true
-    # }).play()
-    # @cutIcon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw_cut.png")
-    # mCoords = App.stage.getMousePosition()
-    # @cutIcon.position.y = mCoords.y-40
-    # @cutIcon.position.x = mCoords.x
-    # @cutIcon.scale.x = @cutIcon.scale.y = .5
-    # App.pondContainer.addChild @cutIcon
+    @crosshairs.visible = false
 
   actionFinish: ->
     super()
-    # App.pondContainer.removeChild @cutIcon
-    # @cutIcon = null
     @switchOn()
+    @crosshairs.visible = true
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/machinegun.png")
     @icon.scale.x = @icon.scale.y = .5
     @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/machinegun.png")
     @shadow.scale.x = @shadow.scale.y = .5
+    @crosshairs = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegun_crosshairs2.png")
+    @crosshairs.scale.x = @crosshairs.scale.y = .1
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
     @shadow.alpha = 0.5
+    App.stage.addChild(@crosshairs)
     super()
 
-  showShadow: (mCoords) ->
-    # @shadow.position.y = mCoords.y+40
-    # @shadow.position.x = mCoords.x+25
-    @shadow.position.y = mCoords.y+20
-    @shadow.position.x = mCoords.x+15
+  showShadow: (mCoords, offsetX, offsetY) ->
+    @shadow.position.y = mCoords.y+40+offsetY
+    @shadow.position.x = mCoords.x+25+offsetX
 
   showTool: ->
+    offsetX = offsetY = offsetY = 0
     if @isPressed()
-      # mCoords = App.stage.getMousePosition()
-      # @cutIcon.position.y = mCoords.y-40
-      # @cutIcon.position.x = mCoords.x
-      # # cutting
-      # @d = PIXI.Sprite.fromImage("resources/images/tools/damage/chainsawDamage.png")
-      # @d.scale.x = @d.scale.y = 2
-      # @d.position.x = mCoords.x
-      # @d.position.y = mCoords.y
-      # App.stage.addChild(@d)
+      offsetX = randNum(-5, 5)
+      offsetY = randNum(-5, 5)
     else
-      mCoords = App.stage.getMousePosition()
-      @icon.position.y = mCoords.y+20
-      @icon.position.x = mCoords.x+0
-      @showShadow(mCoords)
+      do ->
+
+    mCoords = App.stage.getMousePosition()
+    @icon.position.y = mCoords.y+30+offsetY
+    @icon.position.x = mCoords.x+10+offsetX
+    @showShadow(mCoords, offsetX, offsetY)
+    @crosshairs.position.y = mCoords.y - (@crosshairs.height/2)+offsetY
+    @crosshairs.position.x = mCoords.x - (@crosshairs.height/2)+offsetX
 
   switchOff: ->
     super()
