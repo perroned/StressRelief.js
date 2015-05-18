@@ -40,6 +40,7 @@ class @Tool
   App.currentTool = 0
   App.tools.push (new Hammer "Hammer")
   App.tools.push (new Chainsaw "Chainsaw")
+  App.tools.push (new Machinegun "Machinegun")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
 
