@@ -12,7 +12,10 @@ class @Tool
   loadTool: ->
   showShadow: ->
   showTool: ->
-  switchOff: -> @shadow.visible = @icon.visible = false
+  switchOff: ->
+    @shadow.visible = @icon.visible = false
+    App?.sound?.stop?()
+
   switchOn: -> @shadow.visible = @icon.visible = true
 
 @changeTool = (selection) ->
