@@ -1,6 +1,8 @@
 class @Machinegun extends @Tool
   constructor: (@name) ->
     super @name
+    @bullets = []
+    @MAX_BULLETS = 5
 
   actionStart: ->
     super()
@@ -57,16 +59,41 @@ class @Machinegun extends @Tool
       # produce random jitter for the gun and shadow while shooting
       offsetX = randNum(-5, 5)
       offsetY = randNum(-5, 5)
-      if randNum(0, 10) > 4
+      if (chances=randNum(0, 10)) > 4
         @flash.position.y = mCoords.y+5+offsetY
         @flash.position.x = mCoords.x-3+offsetX
         @flash.visible = true
+
+      # spawn a bullet
+      # switch to timing later... lazy
+      if (chances=randNum(-100, 100)) > 90
+        if @bullets.length < @MAX_BULLETS
+          b = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegunbullet.png")
+          b.scale.x = b.scale.y = 2
+          b.position.x = mCoords.x
+          b.position.y = mCoords.y
+          @bullets.push b
+          App.pondContainer.addChild(b)
 
     @icon.position.y = mCoords.y+30+offsetY
     @icon.position.x = mCoords.x+10+offsetX
     @showShadow(mCoords, offsetX, offsetY)
     @crosshairs.position.y = mCoords.y - (@crosshairs.height/2)+offsetY
     @crosshairs.position.x = mCoords.x - (@crosshairs.height/2)+offsetX
+
+    i = 0
+    while i < @bullets.length
+      @bullets[i].position.y += 1
+      @bullets[i].position.x += randNum(-5,5)
+      if @bullets[i].position.y > 500
+        App.pondContainer.removeChild @bullets[i]
+        @bullets.splice(i,1)
+        App.sound = new Howl({
+          urls: ['resources/sounds/machinegun_bullet_land.ogg']
+        }).play()
+
+      i++
+
 
   switchOff: ->
     super()
