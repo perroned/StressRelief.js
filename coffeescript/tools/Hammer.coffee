@@ -9,8 +9,10 @@ class @Hammer extends @Tool
     damage = PIXI.Sprite.fromImage("resources/images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .6
     mCoords = App.stage.getMousePosition()
-    damage.position.y = mCoords.y- 20
-    damage.position.x = mCoords.x-20
+    damage.position.y = mCoords.y
+    damage.position.x = mCoords.x
+    damage.anchor.x = damage.anchor.y = .5
+    damage.rotation = Math.random()*360
     App.tools.damages.push damage
     App.pondContainer.addChild damage
     @icon.rotation =  @shadow.rotation = -.75
