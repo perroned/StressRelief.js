@@ -91,7 +91,7 @@ class @Machinegun extends @Tool
         @bullets[i].speed += .1
         @bullets[i].maxHeight=5000
 
-      @bullets[i].position.x += 5
+      @bullets[i].position.x += 4
       @bullets[i].anchor.x = @bullets[i].anchor.y = .5
       @bullets[i].rotation += .3
       if @bullets[i].position.y > 500
