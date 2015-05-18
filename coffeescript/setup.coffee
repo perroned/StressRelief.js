@@ -42,10 +42,11 @@
   App.bounds = new (PIXI.Rectangle)(-padding, -padding, 630 + padding * 2, 410 + padding * 2)
 
 @setupRenderer = ->
-  App.renderer = PIXI.autoDetectRenderer(630, 410)
+  # use Canvas, because WebGL is broke
+  App.renderer = new PIXI.CanvasRenderer(630, 410)
   App.renderer.view.style.position = 'absolute'
   App.renderer.view.style.width = window.innerWidth + 'px'
   App.renderer.view.style.height = window.innerHeight + 'px'
   App.renderer.view.style.display = 'block'
-  # add render view to DOM
+  # # add render view to DOM
   document.body.appendChild App.renderer.view
