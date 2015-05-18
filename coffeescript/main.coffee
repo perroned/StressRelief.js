@@ -3,7 +3,6 @@
 
 @init = ->
   App.registerKeys();
-  gui = new (dat.GUI)({})
   setupScene()
   setupFish()
   setupTools()
