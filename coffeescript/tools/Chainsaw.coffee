@@ -45,11 +45,12 @@ class @Chainsaw extends @Tool
       @cutIcon.position.y = mCoords.y-40
       @cutIcon.position.x = mCoords.x
       # cutting
-      @d = PIXI.Sprite.fromImage("resources/images/tools/damage/chainsawDamage.png")
-      @d.scale.x = @d.scale.y = 2
-      @d.position.x = mCoords.x
-      @d.position.y = mCoords.y
-      App.stage.addChild(@d)
+      damage = PIXI.Sprite.fromImage("resources/images/tools/damage/chainsawDamage.png")
+      damage.scale.x = damage.scale.y = 2
+      damage.position.x = mCoords.x
+      damage.position.y = mCoords.y
+      App.tools.damages.push damage
+      App.pondContainer.addChild(damage)
     else
       mCoords = App.stage.getMousePosition()
       @icon.position.y = mCoords.y

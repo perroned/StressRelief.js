@@ -47,11 +47,12 @@ class @Machinegun extends @Tool
       # produce random jitter for the bullet's location
       offsetX = randNum(-7, 7)
       offsetY = randNum(-7, 7)
-      @d = PIXI.Sprite.fromImage("resources/images/tools/damage/bulletDamage#{randNum(0,3)}.png")
-      @d.scale.x = @d.scale.y = .45
-      @d.position.x = mCoords.x+offsetX
-      @d.position.y = mCoords.y+offsetY
-      App.stage.addChild(@d)
+      damage = PIXI.Sprite.fromImage("resources/images/tools/damage/bulletDamage#{randNum(0,3)}.png")
+      damage.scale.x = damage.scale.y = .45
+      damage.position.x = mCoords.x+offsetX
+      damage.position.y = mCoords.y+offsetY
+      App.tools.damages.push damage
+      App.pondContainer.addChild(damage)
 
       # produce random jitter for the gun and shadow while shooting
       offsetX = randNum(-5, 5)
