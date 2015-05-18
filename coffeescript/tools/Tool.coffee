@@ -20,7 +20,9 @@ class @Tool
     @shadow.visible = @icon.visible = false
     App?.sound?.stop?()
 
-  switchOn: -> @shadow.visible = @icon.visible = true
+  switchOn: ->
+    @shadow.visible = @icon.visible = true
+    App?.sound?.stop?()
 
 @changeTool = (selection) ->
   App.tools[App.currentTool].switchOff()
