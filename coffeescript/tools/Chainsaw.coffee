@@ -2,7 +2,6 @@ class @Chainsaw extends @Tool
   constructor: (@name) ->
     super @name
     @cutIcon = null
-    @markings = new PIXI.Graphics()
 
   actionStart: ->
     super()
@@ -46,10 +45,11 @@ class @Chainsaw extends @Tool
       @cutIcon.position.y = mCoords.y-40
       @cutIcon.position.x = mCoords.x
       # cutting
-      @markings.beginFill(0x000000)
-      @markings.drawRect(mCoords.x, mCoords.y, 2,2)
-      @markings.endFill()
-      App.stage.addChild(@markings)
+      @d = PIXI.Sprite.fromImage("resources/images/tools/damage/chainsawDamage.png")
+      @d.scale.x = @d.scale.y = 2
+      @d.position.x = mCoords.x
+      @d.position.y = mCoords.y
+      App.stage.addChild(@d)
     else
       mCoords = App.stage.getMousePosition()
       @icon.position.y = mCoords.y
