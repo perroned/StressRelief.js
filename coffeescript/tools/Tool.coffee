@@ -10,6 +10,10 @@ class @Tool
   getName: -> @name
   isPressed: -> pressed
   loadTool: ->
+    # place shadow behind icon
+    App.stage.addChild(@shadow) if @shadow?
+    App.stage.addChild(@icon) if @icon?
+
   showShadow: ->
   showTool: ->
   switchOff: ->

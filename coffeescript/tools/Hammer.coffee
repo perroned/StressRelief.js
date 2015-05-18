@@ -66,9 +66,7 @@ class @Hammer extends @Tool
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
     @shadow.alpha = 0.5
-    # place shadow behind icon
-    App.stage.addChild(@shadow)
-    App.stage.addChild(@icon)
+    super()
 
   showShadow: (mCoords) ->
     @shadow.position.y = mCoords.y+20
