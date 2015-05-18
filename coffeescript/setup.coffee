@@ -14,7 +14,7 @@
   while i < 20
     fishId = i % 4
     fishId += 1
-    fish = PIXI.Sprite.fromImage('images/displacement_fish' + fishId + '.png')
+    fish = PIXI.Sprite.fromImage('resources/images/displacement_fish' + fishId + '.png')
     fish.anchor.x = fish.anchor.y = 0.5
     App.pondContainer.addChild fish
     fish.direction = Math.random() * Math.PI * 2
@@ -25,7 +25,7 @@
     fish.scale.x = fish.scale.y = .2
     App.fishs.push fish
     i++
-  overlay = new (PIXI.TilingSprite)(PIXI.Texture.fromImage('images/zeldaWaves.png'), 630, 410)
+  overlay = new (PIXI.TilingSprite)(PIXI.Texture.fromImage('resources/images/zeldaWaves.png'), 630, 410)
   overlay.alpha = 0.1
   App.pondContainer.addChild overlay
 
@@ -36,7 +36,7 @@
   App.pondContainer = new (PIXI.DisplayObjectContainer)
   App.stage.addChild App.pondContainer
   App.stage.interactive = true
-  bg = PIXI.Sprite.fromImage('images/displacement_BG.jpg')
+  bg = PIXI.Sprite.fromImage('resources/images/displacement_BG.jpg')
   App.pondContainer.addChild bg
   padding = 100
   App.bounds = new (PIXI.Rectangle)(-padding, -padding, 630 + padding * 2, 410 + padding * 2)

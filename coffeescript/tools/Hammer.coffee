@@ -6,7 +6,7 @@ class @Hammer extends @Tool
 
   actionStart: ->
     super()
-    damage = PIXI.Sprite.fromImage("images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
+    damage = PIXI.Sprite.fromImage("resources/images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .6
     mCoords = App.stage.getMousePosition()
     damage.position.y = mCoords.y- 10
@@ -23,10 +23,10 @@ class @Hammer extends @Tool
     @icon.rotation = @shadow.rotation = 0
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("images/tools/tools/hammer.png")
+    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
     @icon.anchor.x = @icon.anchor.y = .5
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("images/tools/tools/hammer.png")
+    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken every color. Set 50% transparency
     shadeMatrix =  [0,0,0,-.5,0,0,0,-.5,0,0,0,-.5,0,0,0,.5];

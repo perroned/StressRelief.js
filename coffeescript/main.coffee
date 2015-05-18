@@ -41,7 +41,7 @@ logo = ->
   ###
   # Add a pixi Logo!
   ###
-  logo = PIXI.Sprite.fromImage('images/logo_small.png')
+  logo = PIXI.Sprite.fromImage('resources/images/logo_small.png')
   App.stage.addChild logo
   logo.anchor.x = 1
   logo.anchor.y = 1
