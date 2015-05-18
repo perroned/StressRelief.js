@@ -2,17 +2,12 @@ class @Machinegun extends @Tool
   constructor: (@name) ->
     super @name
     @bullets = []
-    @MAX_BULLETS = 5
+    @lastBulletSpawn = 0
 
   actionStart: ->
     super()
     @crosshairs.visible = false
     @flash.visible = true
-    App.sound = new Howl({
-      urls: ['resources/sounds/machinegun_shoot.ogg']
-      loop: true
-      sprite: {thing: [0, 100]}
-    }).play("thing")
 
   actionFinish: ->
     super()
@@ -46,6 +41,10 @@ class @Machinegun extends @Tool
     offsetX = offsetY = offsetY = 0
     @flash.visible = false
     if @isPressed()
+      App.sound = new Howl({
+        urls: ['resources/sounds/machinegun_shoot.ogg']
+      }).play()
+
       # produce random jitter for the bullet's location
       offsetX = randNum(-7, 7)
       offsetY = randNum(-7, 7)
@@ -65,15 +64,16 @@ class @Machinegun extends @Tool
         @flash.visible = true
 
       # spawn a bullet
-      # switch to timing later... lazy
-      if (chances=randNum(-100, 100)) > 90
-        if @bullets.length < @MAX_BULLETS
-          b = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegunbullet.png")
-          b.scale.x = b.scale.y = 2
-          b.position.x = mCoords.x
-          b.position.y = mCoords.y
-          @bullets.push b
-          App.pondContainer.addChild(b)
+      if ((Date.now()-@lastBulletSpawn) > 100) or @lastBulletSpawn is 0
+        @lastBulletSpawn = Date.now()
+        b = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegunbullet.png")
+        b.scale.x = b.scale.y = .7
+        b.position.x = mCoords.x + @icon.width+5
+        b.position.y = mCoords.y + @icon.height+5
+        b.speed = 1
+        b.maxHeight = b.position.y - randNum(50,150)
+        @bullets.push b
+        App.pondContainer.addChild(b)
 
     @icon.position.y = mCoords.y+30+offsetY
     @icon.position.x = mCoords.x+10+offsetX
@@ -83,8 +83,17 @@ class @Machinegun extends @Tool
 
     i = 0
     while i < @bullets.length
-      @bullets[i].position.y += 1
-      @bullets[i].position.x += randNum(-5,5)
+      if @bullets[i].position.y > @bullets[i].maxHeight
+        @bullets[i].position.y -= 5 + -@bullets[i].speed
+        @bullets[i].speed -= .05
+      else
+        @bullets[i].position.y += 1+ @bullets[i].speed
+        @bullets[i].speed += .1
+        @bullets[i].maxHeight=5000
+
+      @bullets[i].position.x += 5
+      @bullets[i].anchor.x = @bullets[i].anchor.y = .5
+      @bullets[i].rotation += .3
       if @bullets[i].position.y > 500
         App.pondContainer.removeChild @bullets[i]
         @bullets.splice(i,1)
@@ -93,7 +102,6 @@ class @Machinegun extends @Tool
         }).play()
 
       i++
-
 
   switchOff: ->
     super()
