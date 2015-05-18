@@ -16,12 +16,9 @@ class @Chainsaw extends @Tool
     @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw.png")
     @shadow.scale.x = @shadow.scale.y = .5
     App.stage.addChild(@shadow)
-    # darken every color. Set 50% transparency
-    shadeMatrix =  [0,0,0,-.5,0,0,0,-.5,0,0,0,-.5,0,0,0,.5];
-    shadeFilter = new PIXI.ColorMatrixFilter()
-    shadeFilter.matrix = shadeMatrix
-    @shadow.filters=[shadeFilter]
-    @shadow.anchor.x = @shadow.anchor.y = .5
+    # darken the color. Set 50% transparency
+    @shadow.tint = 0x151515
+    @shadow.alpha = 0.5
 
   showShadow: (mCoords) ->
     @shadow.position.y = mCoords.y+40

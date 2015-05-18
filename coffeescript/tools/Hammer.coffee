@@ -28,10 +28,8 @@ class @Hammer extends @Tool
     @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken every color. Set 50% transparency
-    shadeMatrix =  [0,0,0,-.5,0,0,0,-.5,0,0,0,-.5,0,0,0,.5];
-    shadeFilter = new PIXI.ColorMatrixFilter()
-    shadeFilter.matrix = shadeMatrix
-    @shadow.filters=[shadeFilter]
+    @shadow.tint = 0x151515
+    @shadow.alpha = 0.5
     # place shadow behind icon
     App.stage.addChild(@shadow)
     App.stage.addChild(@icon)
