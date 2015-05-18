@@ -44,15 +44,22 @@ class @Machinegun extends @Tool
     offsetX = offsetY = offsetY = 0
     @flash.visible = false
     if @isPressed()
+      # produce random jitter for the bullet's location
+      offsetX = randNum(-7, 7)
+      offsetY = randNum(-7, 7)
+      @d = PIXI.Sprite.fromImage("resources/images/tools/damage/bulletDamage#{randNum(0,3)}.png")
+      @d.scale.x = @d.scale.y = .45
+      @d.position.x = mCoords.x+offsetX
+      @d.position.y = mCoords.y+offsetY
+      App.stage.addChild(@d)
+
+      # produce random jitter for the gun and shadow while shooting
       offsetX = randNum(-5, 5)
       offsetY = randNum(-5, 5)
       if randNum(0, 10) > 4
         @flash.position.y = mCoords.y+5+offsetY
         @flash.position.x = mCoords.x-3+offsetX
         @flash.visible = true
-    else
-      do ->
-
 
     @icon.position.y = mCoords.y+30+offsetY
     @icon.position.x = mCoords.x+10+offsetX
@@ -62,6 +69,8 @@ class @Machinegun extends @Tool
 
   switchOff: ->
     super()
+    @crosshairs.visible = false
 
   switchOn: ->
     super()
+    @crosshairs.visible = true
