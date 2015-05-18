@@ -9,13 +9,14 @@ class @Hammer extends @Tool
     damage = PIXI.Sprite.fromImage("resources/images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .6
     mCoords = App.stage.getMousePosition()
-    damage.position.y = mCoords.y- 10
-    damage.position.x = mCoords.x-40
+    damage.position.y = mCoords.y- 20
+    damage.position.x = mCoords.x-20
     App.tools.damages.push damage
     App.pondContainer.addChild damage
     @icon.rotation =  @shadow.rotation = -.75
-    @shadow.position.y = (@icon.position.y - 0)
-    @shadow.position.x= (@icon.position.x - 30)
+    @icon.position.x = @icon.position.x - 5
+    @shadow.position.y = @icon.position.y - 0
+    @shadow.position.x = @icon.position.x - 30
     @handleSmashSound(mCoords)
 
   actionFinish: ->
@@ -68,14 +69,14 @@ class @Hammer extends @Tool
     App.stage.addChild(@icon)
 
   showShadow: (mCoords) ->
-    @shadow.position.y = mCoords.y+30
-    @shadow.position.x = mCoords.x
+    @shadow.position.y = mCoords.y+20
+    @shadow.position.x = mCoords.x+20
 
   showTool: ->
     if not @isPressed()
       mCoords = App.stage.getMousePosition()
-      @icon.position.y = mCoords.y+30
-      @icon.position.x = mCoords.x
+      @icon.position.y = mCoords.y+20
+      @icon.position.x = mCoords.x+20
       @showShadow(mCoords)
 
   switchOff: ->
