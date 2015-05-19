@@ -107,6 +107,12 @@ class @Machinegun extends @Tool
     super()
     @crosshairs.visible = false
     @flash.visible = false
+    # get rid of all bullets in the air
+    i = 0
+    while i < @bullets.length
+      App.pondContainer.removeChild @bullets[i]
+      i++
+    @bullets = []
 
   switchOn: ->
     super()

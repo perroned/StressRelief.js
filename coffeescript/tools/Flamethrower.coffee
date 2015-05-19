@@ -97,6 +97,12 @@ class @Flamethrower extends @Tool
 
   switchOff: ->
     super()
+    # get rid of all fireballs
+    i = 0
+    while i < @fireballs.length
+      App.pondContainer.removeChild @fireballs[i]
+      i++
+    @fireballs = []
 
   switchOn: ->
     super()
