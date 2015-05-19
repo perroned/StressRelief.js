@@ -38,7 +38,7 @@ class @Machinegun extends @Tool
 
   showTool: ->
     mCoords = App.stage.getMousePosition()
-    offsetX = offsetY = offsetY = 0
+    offsetX = offsetY = 0
     @flash.visible = false
     if @isPressed()
       App.sound = new Howl({
@@ -106,6 +106,7 @@ class @Machinegun extends @Tool
   switchOff: ->
     super()
     @crosshairs.visible = false
+    @flash.visible = false
 
   switchOn: ->
     super()
