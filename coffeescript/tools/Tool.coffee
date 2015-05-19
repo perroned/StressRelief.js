@@ -44,6 +44,7 @@ class @Tool
   App.tools.push (new Chainsaw "Chainsaw")
   App.tools.push (new Machinegun "Machinegun")
   App.tools.push (new Flamethrower "Flamethrower")
+  App.tools.push (new Colorthrower "Colorthrower")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
 
