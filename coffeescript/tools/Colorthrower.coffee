@@ -1,13 +1,26 @@
 class @Colorthrower extends @Tool
+  @FIRE_INTERVAL: 500 # how often (in ms) the tool can be used
+  @MAX_COLORS: 8
+  @PAINT_BALL_MOVE_AMOUNT: 2 # how far the paint balls move
+  @PAINT_BALL_MOVE_INTERVAL: 10 # how often the paint balls move
+  @SHOOT_DISTANCE: 75 # how far the paint balls move before they explode
+
   constructor: (@name) ->
     super @name
+    @lastPaintBall = 0
+    @paintBalls = []
+    @paintSplats = []
 
   actionStart: ->
     super()
+    @makePaintBall()
 
   actionFinish: ->
     super()
-    @switchOn()
+    @shadow.visible = @icon.visible = true
+    # stop audio unless it is the thrower's sound
+    if App.sound.who isnt "colorthrower"
+      App?.sound?.stop?()
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/colorthrower.png")
@@ -19,18 +32,81 @@ class @Colorthrower extends @Tool
     @shadow.alpha = 0.5
     super()
 
+  makePaintBall: ->
+    # check if a new paintball can be spawned
+    if ((Date.now()-@lastPaintBall) > Colorthrower.FIRE_INTERVAL) or @lastPaintBall is 0
+      @lastPaintBall = Date.now()
+      # generate a color
+      color = randNum(0, Colorthrower.MAX_COLORS)
+      paintBall = PIXI.Sprite.fromImage("resources/images/tools/damage/colorSplats/coloredBlob_#{color}.png")
+      paintBall.color = color
+      paintBall.scale.x = paintBall.scale.y = .5
+      mCoords = App.stage.getMousePosition()
+      paintBall.lastMove = 0
+      App.pondContainer.addChild(paintBall)
+      paintBall.startY = paintBall.position.y = mCoords.y+20
+      paintBall.startX = paintBall.position.x = mCoords.x
+      @paintBalls.push paintBall
+      App.sound = new Howl({
+        urls: ['resources/sounds/paint_shoot.ogg']
+      }).play()
+      App.sound.who = "colorthrower"
+      @lastPaintBall = Date.now()
+
+  makePaintSplatter: (i) ->
+    paintBall = @paintBalls[i]
+    # create a splatter based on the paint balls color and a random shape
+    splatter = PIXI.Sprite.fromImage("resources/images/tools/damage/colorSplats/coloredSplat_#{paintBall.color}_#{randNum(0,3)}.png")
+    splatter.scale.y = splatter.scale.x = .4 + randNum(-1, 2)/20
+    splatter.position.y = (paintBall.position.y - 10) + randNum(-10,10)
+    splatter.position.x = (paintBall.position.x - 10) + randNum(-10,10)
+    App.pondContainer.addChild splatter
+    @paintSplats.push splatter
+
+    App.pondContainer.removeChild paintBall
+    @paintBalls.splice(i,1)
+
+    App.sound = new Howl({
+      urls: ['resources/sounds/paint_splatter.ogg']
+    }).play()
+
   showShadow: (mCoords) ->
     @shadow.position.y = @icon.position.y + 10
     @shadow.position.x = @icon.position.x + 50
 
   showTool: ->
+    if @isPressed() # if the button is held keep spawning
+      @makePaintBall()
+
     mCoords = App.stage.getMousePosition()
     @icon.position.y = mCoords.y+30
     @icon.position.x = mCoords.x+10
     @showShadow(mCoords)
 
+    i = 0
+    while i < @paintBalls.length
+      paintBall = @paintBalls[i]
+      # splatter the paint ball
+      if paintBall.position.y < (paintBall.startY-Colorthrower.SHOOT_DISTANCE) and paintBall.position.x < (paintBall.startX-Colorthrower.SHOOT_DISTANCE)
+        # spawn a splatter
+        @makePaintSplatter(i)
+        continue
+      # move the paint ball
+      if (((Date.now()-paintBall.lastMove) > Colorthrower.PAINT_BALL_MOVE_INTERVAL) or paintBall.lastMove is 0)
+        paintBall.lastMove = Date.now()
+        paintBall.position.x -= Colorthrower.PAINT_BALL_MOVE_AMOUNT
+        paintBall.position.y -= Colorthrower.PAINT_BALL_MOVE_AMOUNT
+
+      i++
+
   switchOff: ->
     super()
+    # get rid of all paint balls in the air
+    i = 0
+    while i < @paintBalls.length
+      App.pondContainer.removeChild @paintBalls[i]
+      i++
+    @paintBalls = []
 
   switchOn: ->
     super()
