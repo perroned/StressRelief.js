@@ -18,7 +18,7 @@ class @Colorthrower extends @Tool
   actionFinish: ->
     super()
     @shadow.visible = @icon.visible = true
-    # stop audio unless it is the thrower's sound
+    # stop audio unless it is the colorthrower's sound
     if App.sound.who isnt "colorthrower"
       App?.sound?.stop?()
 
@@ -58,9 +58,11 @@ class @Colorthrower extends @Tool
     # create a splatter based on the paint balls color and a random shape
     splatter = PIXI.Sprite.fromImage("resources/images/tools/damage/colorSplats/coloredSplat_#{paintBall.color}_#{randNum(0,3)}.png")
     splatter.scale.y = splatter.scale.x = .4 + randNum(-1, 2)/20
-    splatter.position.y = (paintBall.position.y - 10) + randNum(-10,10)
-    splatter.position.x = (paintBall.position.x - 10) + randNum(-10,10)
+    splatter.position.y = (paintBall.position.y+15) + randNum(-10,10)
+    splatter.position.x = (paintBall.position.x+15) + randNum(-10,10)
+    splatter.anchor.y = splatter.anchor.x = .5
     App.pondContainer.addChild splatter
+    splatter.rotation = Math.random() * Math.PI * 2
     @paintSplats.push splatter
 
     App.pondContainer.removeChild paintBall
