@@ -6,23 +6,19 @@ class @Flamethrower extends @Tool
 
   actionStart: ->
     super()
-    App?.sound?.stop?()
-    App.sound = new Howl({
-      urls: ['resources/sounds/flamethrower.ogg']
-      loop: true
-    }).play()
+    @sound_Spread true
 
   actionFinish: ->
     super()
     @switchOn()
-    App.sound = new Howl({
-      urls: ['resources/sounds/flamethrower_crackle.ogg']
-      loop: true
-    }).play()
+    @sound_Spread false
+    @sound_Crackle true
 
   cleanUp: ->
     @fireballs = super([@fireballs])
-    App.sound?.stop?()
+    # App.sound?.stop?()
+    @sound_Spread false
+    @sound_Crackle false
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/flamethrower.png")
@@ -41,11 +37,14 @@ class @Flamethrower extends @Tool
   showTool: (isActive) ->
     if isActive
       mCoords = App.stage.getMousePosition()
+      @icon.position.y = mCoords.y+30
+      @icon.position.x = mCoords.x+10
+      @showShadow(mCoords)
+
       if @isPressed()
         # spawn a fireball every 20ms or immediately if there are none
         if ((Date.now()-@lastFireballSpawn) > 20) or @lastFireballSpawn is 0
           @lastFireballSpawn = Date.now()
-
           fireball = PIXI.Sprite.fromImage("resources/images/tools/damage/fireball.png")
           fireball.scale.x = fireball.scale.y = .45
           fireball.position.x = mCoords.x
@@ -58,15 +57,10 @@ class @Flamethrower extends @Tool
           fireball.lastBurn = 0 # the last time a burn mark was drawn
           @fireballs.push fireball
           App.pondContainer.addChild(fireball)
-      else
-        # no flames are being spread
-        # if there are no more flames stop the audio
-        if @fireballs.length is 0
-          App.sound?.stop?()
 
-      @icon.position.y = mCoords.y+30
-      @icon.position.x = mCoords.x+10
-      @showShadow(mCoords)
+    # if there are no more flames stop the audio
+    if @fireballs.length is 0
+      @sound_Crackle false
 
     # process every fireball
     i = 0
@@ -99,8 +93,25 @@ class @Flamethrower extends @Tool
 
       i++
 
+  sound_Spread: (start) ->
+    App.sound.flamethrower_spread?.stop()
+    if start
+      App.sound.flamethrower_spread = new Howl({
+        urls: ['resources/sounds/flamethrower_spread.ogg']
+        loop: true
+      }).play()
+
+  sound_Crackle: (start) ->
+    App.sound.flamethrower_crackle?.stop()
+    if start
+      App.sound.flamethrower_crackle = new Howl({
+        urls: ['resources/sounds/flamethrower_crackle.ogg']
+        loop: true
+      }).play()
+
   switchOff: ->
     super()
+    @sound_Spread false
 
   switchOn: ->
     super()

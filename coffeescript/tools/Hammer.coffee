@@ -54,11 +54,11 @@ class @Hammer extends @Tool
     # play noise (harder for the darker the area)
     luminance = @avgColorInHitArea(mCoords)
     if luminance > 30
-      App.sound = new Howl({urls: ['resources/sounds/hammer_normal.ogg']}).play()
+      App.sound.hammer_normal = new Howl({urls: ['resources/sounds/hammer_normal.ogg']}).play()
     else if luminance > 15
-      App.sound = new Howl({urls: ['resources/sounds/hammer_used.ogg']}).play()
+      App.sound.hammer_used = new Howl({urls: ['resources/sounds/hammer_used.ogg']}).play()
     else
-      App.sound = new Howl({urls: ['resources/sounds/hammer_dead.ogg']}).play()
+      App.sound.hammer_dead = new Howl({urls: ['resources/sounds/hammer_dead.ogg']}).play()
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
@@ -86,6 +86,9 @@ class @Hammer extends @Tool
 
   switchOff: ->
     super()
+    App.sound.hammer_normal?.stop()
+    App.sound.hammer_used?.stop()
+    App.sound.hammer_dead?.stop()
 
   switchOn: ->
     super()

@@ -12,7 +12,7 @@ class @Machinegun extends @Tool
   actionFinish: ->
     super()
     @switchOn()
-    App.sound = new Howl({urls: ['resources/sounds/machinegun_shoot.ogg']}).play()
+    App.sound.machinegun_shoot = new Howl({urls: ['resources/sounds/machinegun_shoot.ogg']}).play()
     @crosshairs.visible = true
     @flash.visible = false
 
@@ -45,7 +45,7 @@ class @Machinegun extends @Tool
       offsetX = offsetY = 0
       @flash.visible = false
       if @isPressed()
-        App.sound = new Howl({
+        App.sound.machinegun_shoot = new Howl({
           urls: ['resources/sounds/machinegun_shoot.ogg']
         }).play()
 
@@ -101,7 +101,7 @@ class @Machinegun extends @Tool
       if @bullets[i].position.y > 500
         App.pondContainer.removeChild @bullets[i]
         @bullets.splice(i,1)
-        App.sound = new Howl({
+        App.sound.machinegun_bullet_land = new Howl({
           urls: ['resources/sounds/machinegun_bullet_land.ogg']
         }).play()
 
@@ -111,6 +111,8 @@ class @Machinegun extends @Tool
     super()
     @crosshairs.visible = false
     @flash.visible = false
+    App.sound.machinegun_bullet_land?.stop()
+    App.sound.machinegun_shoot?.stop()
 
   switchOn: ->
     super()

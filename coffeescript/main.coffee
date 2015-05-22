@@ -3,6 +3,7 @@
 
 @init = ->
   App.registerKeys();
+  App.sound = {}
   setupScene()
   setupFish()
   setupTools()

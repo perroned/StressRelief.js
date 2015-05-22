@@ -18,9 +18,6 @@ class @Colorthrower extends @Tool
   actionFinish: ->
     super()
     @shadow.visible = @icon.visible = true
-    # stop audio unless it is the colorthrower's sound
-    if App.sound.who isnt "colorthrower"
-      App?.sound?.stop?()
 
   cleanUp: ->
     @paintSplats = @paintBalls = super([@paintBalls,@paintSplats])
@@ -50,7 +47,7 @@ class @Colorthrower extends @Tool
       paintBall.startY = paintBall.position.y = mCoords.y+20
       paintBall.startX = paintBall.position.x = mCoords.x
       @paintBalls.push paintBall
-      App.sound = new Howl({
+      App.sound.paint_shoot = new Howl({
         urls: ['resources/sounds/paint_shoot.ogg']
       }).play()
       App.sound.who = "colorthrower"
@@ -71,7 +68,7 @@ class @Colorthrower extends @Tool
     App.pondContainer.removeChild paintBall
     @paintBalls.splice(i,1)
 
-    App.sound = new Howl({
+    App.sound.paint_splatter = new Howl({
       urls: ['resources/sounds/paint_splatter.ogg']
     }).play()
 
@@ -107,6 +104,8 @@ class @Colorthrower extends @Tool
 
   switchOff: ->
     super()
+    App.sound.paint_shoot?.stop()
+    App.sound.paint_splatter?.stop()
 
   switchOn: ->
     super()

@@ -6,10 +6,8 @@ class @Chainsaw extends @Tool
   actionStart: ->
     super()
     @switchOff()
-    App.sound = new Howl({
-      urls: ['resources/sounds/chainsaw_cut.ogg']
-      loop: true
-    }).play()
+    @sound_Rev false
+    @sound_Cut true
     @cutIcon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw_cut.png")
     mCoords = App.stage.getMousePosition()
     @cutIcon.position.y = mCoords.y-40
@@ -22,6 +20,8 @@ class @Chainsaw extends @Tool
     App.pondContainer.removeChild @cutIcon
     @cutIcon = null
     @switchOn()
+    @sound_Cut false
+    @sound_Rev true
 
   cleanUp: ->
     super()
@@ -61,12 +61,28 @@ class @Chainsaw extends @Tool
       @icon.position.x = mCoords.x
       @showShadow(mCoords)
 
+  sound_Cut: (start) ->
+    App.sound.chainsaw_cut?.stop()
+    if start
+      App.sound.chainsaw_cut = new Howl({
+        urls: ['resources/sounds/chainsaw_cut.ogg']
+        loop: true
+      }).play()
+
+  sound_Rev: (start) ->
+    App.sound.chainsaw_rev?.stop()
+    if start
+      App.sound.chainsaw_rev = new Howl({
+        urls: ['resources/sounds/chainsaw_rev.ogg']
+        loop: true
+      }).play()
+
   switchOff: ->
     super()
+    @sound_Cut false
+    @sound_Rev false
 
   switchOn: ->
     super()
-    App.sound = new Howl({
-      urls: ['resources/sounds/chainsaw_rev.ogg']
-      loop: true
-    }).play()
+    @sound_Cut false
+    @sound_Rev true
