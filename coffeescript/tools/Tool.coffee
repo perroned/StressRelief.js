@@ -1,14 +1,26 @@
 class @Tool
-  damageIconCount = 0
-  icon = null
-  pressed = false
-  shadow = null
-
   constructor: (@name) ->
-  actionStart: -> pressed = true
-  actionFinish: -> pressed = false
+    @damageIconCount = 0
+    @damages = []
+    @icon = null
+    @pressed = false
+    @shadow = null
+  actionStart: -> @pressed = true
+  actionFinish: -> @pressed = false
+  cleanUp: (additional) ->
+    additional ?= []
+    for d in ([@damages].concat additional)
+      i = 0
+      while i < d.length
+        App.pondContainer.removeChild d[i]
+        i++
+    @damages = []
+    []
+
   getName: -> @name
-  isPressed: -> pressed
+  isPressed: ->
+    @pressed
+
   loadTool: ->
     # place shadow behind icon
     App.stage.addChild(@shadow) if @shadow?
@@ -30,15 +42,12 @@ class @Tool
   App.tools[App.currentTool].switchOn()
 
 @cleanupDamage = ->
-  j = 0
-  while j < App.tools.damages.length
-    App.pondContainer.removeChild(App.tools.damages[j])
-    j++
-  App.tools.damages = []
+  for tool in App.tools
+    tool.cleanUp()
+  0
 
 @setupTools = ->
   App.tools = []
-  App.tools.damages = []
   App.currentTool = 0
   App.tools.push (new Hammer "Hammer")
   App.tools.push (new Chainsaw "Chainsaw")
@@ -48,5 +57,6 @@ class @Tool
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
 
-@showTool = ->
-  App.tools[App.currentTool].showTool()
+@showTool = (isActive) ->
+  for tool, i in App.tools
+    tool.showTool(i is App.currentTool)

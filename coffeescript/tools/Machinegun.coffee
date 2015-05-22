@@ -16,6 +16,9 @@ class @Machinegun extends @Tool
     @crosshairs.visible = true
     @flash.visible = false
 
+  cleanUp: ->
+    @bullets = super([@bullets])
+
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/machinegun.png")
     @icon.scale.x = @icon.scale.y = .5
@@ -36,50 +39,51 @@ class @Machinegun extends @Tool
     @shadow.position.y = mCoords.y+40+offsetY
     @shadow.position.x = mCoords.x+25+offsetX
 
-  showTool: ->
-    mCoords = App.stage.getMousePosition()
-    offsetX = offsetY = 0
-    @flash.visible = false
-    if @isPressed()
-      App.sound = new Howl({
-        urls: ['resources/sounds/machinegun_shoot.ogg']
-      }).play()
+  showTool: (isActive) ->
+    if isActive
+      mCoords = App.stage.getMousePosition()
+      offsetX = offsetY = 0
+      @flash.visible = false
+      if @isPressed()
+        App.sound = new Howl({
+          urls: ['resources/sounds/machinegun_shoot.ogg']
+        }).play()
 
-      # produce random jitter for the bullet's location
-      offsetX = randNum(-7, 7)
-      offsetY = randNum(-7, 7)
-      damage = PIXI.Sprite.fromImage("resources/images/tools/damage/bulletDamage#{randNum(0,3)}.png")
-      damage.scale.x = damage.scale.y = .45
-      damage.position.x = mCoords.x+offsetX
-      damage.position.y = mCoords.y+offsetY
-      App.tools.damages.push damage
-      App.pondContainer.addChild(damage)
+        # produce random jitter for the bullet's location
+        offsetX = randNum(-7, 7)
+        offsetY = randNum(-7, 7)
+        damage = PIXI.Sprite.fromImage("resources/images/tools/damage/bulletDamage#{randNum(0,3)}.png")
+        damage.scale.x = damage.scale.y = .45
+        damage.position.x = mCoords.x+offsetX
+        damage.position.y = mCoords.y+offsetY
+        @damages.push damage
+        App.pondContainer.addChild(damage)
 
-      # produce random jitter for the gun and shadow while shooting
-      offsetX = randNum(-5, 5)
-      offsetY = randNum(-5, 5)
-      if (chances=randNum(0, 10)) > 4
-        @flash.position.y = mCoords.y+5+offsetY
-        @flash.position.x = mCoords.x-3+offsetX
-        @flash.visible = true
+        # produce random jitter for the gun and shadow while shooting
+        offsetX = randNum(-5, 5)
+        offsetY = randNum(-5, 5)
+        if (chances=randNum(0, 10)) > 4
+          @flash.position.y = mCoords.y+5+offsetY
+          @flash.position.x = mCoords.x-3+offsetX
+          @flash.visible = true
 
-      # spawn a bullet
-      if ((Date.now()-@lastBulletSpawn) > 100) or @lastBulletSpawn is 0
-        @lastBulletSpawn = Date.now()
-        b = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegunbullet.png")
-        b.scale.x = b.scale.y = .7
-        b.position.x = mCoords.x + @icon.width+5
-        b.position.y = mCoords.y + @icon.height+5
-        b.speed = 1
-        b.maxHeight = b.position.y - randNum(50,150)
-        @bullets.push b
-        App.pondContainer.addChild(b)
+        # spawn a bullet
+        if ((Date.now()-@lastBulletSpawn) > 100) or @lastBulletSpawn is 0
+          @lastBulletSpawn = Date.now()
+          b = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegunbullet.png")
+          b.scale.x = b.scale.y = .7
+          b.position.x = mCoords.x + @icon.width+5
+          b.position.y = mCoords.y + @icon.height+5
+          b.speed = 1
+          b.maxHeight = b.position.y - randNum(50,150)
+          @bullets.push b
+          App.pondContainer.addChild(b)
 
-    @icon.position.y = mCoords.y+30+offsetY
-    @icon.position.x = mCoords.x+10+offsetX
-    @showShadow(mCoords, offsetX, offsetY)
-    @crosshairs.position.y = mCoords.y - (@crosshairs.height/2)+offsetY
-    @crosshairs.position.x = mCoords.x - (@crosshairs.height/2)+offsetX
+      @icon.position.y = mCoords.y+30+offsetY
+      @icon.position.x = mCoords.x+10+offsetX
+      @showShadow(mCoords, offsetX, offsetY)
+      @crosshairs.position.y = mCoords.y - (@crosshairs.height/2)+offsetY
+      @crosshairs.position.x = mCoords.x - (@crosshairs.height/2)+offsetX
 
     i = 0
     while i < @bullets.length
@@ -107,12 +111,6 @@ class @Machinegun extends @Tool
     super()
     @crosshairs.visible = false
     @flash.visible = false
-    # get rid of all bullets in the air
-    i = 0
-    while i < @bullets.length
-      App.pondContainer.removeChild @bullets[i]
-      i++
-    @bullets = []
 
   switchOn: ->
     super()

@@ -23,6 +23,9 @@ class @Chainsaw extends @Tool
     @cutIcon = null
     @switchOn()
 
+  cleanUp: ->
+    super()
+
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw.png")
     @icon.scale.x = @icon.scale.y = .5
@@ -39,7 +42,8 @@ class @Chainsaw extends @Tool
     @shadow.position.y = mCoords.y+20
     @shadow.position.x = mCoords.x+25
 
-  showTool: ->
+  showTool: (isActive) ->
+    return if not isActive
     if @isPressed()
       mCoords = App.stage.getMousePosition()
       @cutIcon.position.y = mCoords.y-40
@@ -49,7 +53,7 @@ class @Chainsaw extends @Tool
       damage.scale.x = damage.scale.y = 2
       damage.position.x = mCoords.x
       damage.position.y = mCoords.y
-      App.tools.damages.push damage
+      @damages.push damage
       App.pondContainer.addChild(damage)
     else
       mCoords = App.stage.getMousePosition()

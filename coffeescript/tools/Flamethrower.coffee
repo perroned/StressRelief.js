@@ -2,7 +2,6 @@ class @Flamethrower extends @Tool
   constructor: (@name) ->
     super @name
     @fireballs = []
-    @burns = []
     @lastFireballSpawn = 0
 
   actionStart: ->
@@ -21,6 +20,10 @@ class @Flamethrower extends @Tool
       loop: true
     }).play()
 
+  cleanUp: ->
+    @fireballs = super([@fireballs])
+    App.sound?.stop?()
+
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/flamethrower.png")
     @icon.scale.x = @icon.scale.y = .5
@@ -35,34 +38,35 @@ class @Flamethrower extends @Tool
     @shadow.position.y = mCoords.y+40
     @shadow.position.x = mCoords.x+25
 
-  showTool: ->
-    mCoords = App.stage.getMousePosition()
-    if @isPressed()
-      # spawn a fireball every 20ms or immediately if there are none
-      if ((Date.now()-@lastFireballSpawn) > 20) or @lastFireballSpawn is 0
-        @lastFireballSpawn = Date.now()
+  showTool: (isActive) ->
+    if isActive
+      mCoords = App.stage.getMousePosition()
+      if @isPressed()
+        # spawn a fireball every 20ms or immediately if there are none
+        if ((Date.now()-@lastFireballSpawn) > 20) or @lastFireballSpawn is 0
+          @lastFireballSpawn = Date.now()
 
-        fireball = PIXI.Sprite.fromImage("resources/images/tools/damage/fireball.png")
-        fireball.scale.x = fireball.scale.y = .45
-        fireball.position.x = mCoords.x
-        fireball.position.y = mCoords.y
-        fireball.timeCreated = Date.now() # when it was created
-        fireball.lifetime = randNum(4,8)*1000 # how long it will last
-        fireball.direction = Math.random() * Math.PI * 2
-        fireball.speed = .1
-        fireball.turnSpeed = Math.random() - 0.8
-        fireball.lastBurn = 0 # the last time a burn mark was drawn
-        @fireballs.push fireball
-        App.pondContainer.addChild(fireball)
-    else
-      # no flames are being spread
-      # if there are no more flames stop the audio
-      if @fireballs.length is 0
-        App.sound?.stop?()
+          fireball = PIXI.Sprite.fromImage("resources/images/tools/damage/fireball.png")
+          fireball.scale.x = fireball.scale.y = .45
+          fireball.position.x = mCoords.x
+          fireball.position.y = mCoords.y
+          fireball.timeCreated = Date.now() # when it was created
+          fireball.lifetime = randNum(4,8)*1000 # how long it will last
+          fireball.direction = Math.random() * Math.PI * 2
+          fireball.speed = .1
+          fireball.turnSpeed = Math.random() - 0.8
+          fireball.lastBurn = 0 # the last time a burn mark was drawn
+          @fireballs.push fireball
+          App.pondContainer.addChild(fireball)
+      else
+        # no flames are being spread
+        # if there are no more flames stop the audio
+        if @fireballs.length is 0
+          App.sound?.stop?()
 
-    @icon.position.y = mCoords.y+30
-    @icon.position.x = mCoords.x+10
-    @showShadow(mCoords)
+      @icon.position.y = mCoords.y+30
+      @icon.position.x = mCoords.x+10
+      @showShadow(mCoords)
 
     # process every fireball
     i = 0
@@ -82,7 +86,7 @@ class @Flamethrower extends @Tool
         burn.position.x = @fireballs[i].position.x
         burn.position.y = @fireballs[i].position.y
         burn.alpha = .5
-        @burns.push burn
+        @damages.push burn
         App.pondContainer.addChild(burn)
         # keep the fireballs on top of the burns
         App.pondContainer.removeChild @fireballs[i]
@@ -97,12 +101,6 @@ class @Flamethrower extends @Tool
 
   switchOff: ->
     super()
-    # get rid of all fireballs
-    i = 0
-    while i < @fireballs.length
-      App.pondContainer.removeChild @fireballs[i]
-      i++
-    @fireballs = []
 
   switchOn: ->
     super()

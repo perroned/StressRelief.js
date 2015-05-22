@@ -13,7 +13,7 @@ class @Hammer extends @Tool
     damage.position.x = mCoords.x
     damage.anchor.x = damage.anchor.y = .5
     damage.rotation = Math.random()*360
-    App.tools.damages.push damage
+    @damages.push damage
     App.pondContainer.addChild damage
     @icon.rotation =  @shadow.rotation = -.75
     @icon.position.x = @icon.position.x - 5
@@ -47,6 +47,9 @@ class @Hammer extends @Tool
     blue /= data.data.length
     (red*0.299 + green*0.587 + blue*0.114) # calculate luminance
 
+  cleanUp: ->
+    super()
+
   handleSmashSound: (mCoords) ->
     # play noise (harder for the darker the area)
     luminance = @avgColorInHitArea(mCoords)
@@ -72,7 +75,9 @@ class @Hammer extends @Tool
     @shadow.position.y = mCoords.y+20
     @shadow.position.x = mCoords.x+20
 
-  showTool: ->
+  showTool: (isActive) ->
+    return if not isActive
+
     if not @isPressed()
       mCoords = App.stage.getMousePosition()
       @icon.position.y = mCoords.y+20

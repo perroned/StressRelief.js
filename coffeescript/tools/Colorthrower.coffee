@@ -22,6 +22,9 @@ class @Colorthrower extends @Tool
     if App.sound.who isnt "colorthrower"
       App?.sound?.stop?()
 
+  cleanUp: ->
+    @paintSplats = @paintBalls = super([@paintBalls,@paintSplats])
+
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/colorthrower.png")
     @icon.scale.x = @icon.scale.y = .5
@@ -76,14 +79,15 @@ class @Colorthrower extends @Tool
     @shadow.position.y = @icon.position.y + 10
     @shadow.position.x = @icon.position.x + 50
 
-  showTool: ->
-    if @isPressed() # if the button is held keep spawning
-      @makePaintBall()
+  showTool: (isActive) ->
+    if isActive
+      if @isPressed() # if the button is held keep spawning
+        @makePaintBall()
 
-    mCoords = App.stage.getMousePosition()
-    @icon.position.y = mCoords.y+30
-    @icon.position.x = mCoords.x+10
-    @showShadow(mCoords)
+      mCoords = App.stage.getMousePosition()
+      @icon.position.y = mCoords.y+30
+      @icon.position.x = mCoords.x+10
+      @showShadow(mCoords)
 
     i = 0
     while i < @paintBalls.length
@@ -103,12 +107,6 @@ class @Colorthrower extends @Tool
 
   switchOff: ->
     super()
-    # get rid of all paint balls in the air
-    i = 0
-    while i < @paintBalls.length
-      App.pondContainer.removeChild @paintBalls[i]
-      i++
-    @paintBalls = []
 
   switchOn: ->
     super()
