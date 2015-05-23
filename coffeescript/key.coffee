@@ -37,3 +37,4 @@ App.registerKeys = ->
   App.keyboard(51).press = -> changeTool(2)
   App.keyboard(52).press = -> changeTool(3)
   App.keyboard(53).press = -> changeTool(4)
+  App.keyboard(54).press = -> changeTool(5)
