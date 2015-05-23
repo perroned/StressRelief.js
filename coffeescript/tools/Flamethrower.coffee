@@ -16,7 +16,6 @@ class @Flamethrower extends @Tool
 
   cleanUp: ->
     @fireballs = super([@fireballs])
-    # App.sound?.stop?()
     @sound_Spread false
     @sound_Crackle false
 

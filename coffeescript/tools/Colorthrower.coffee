@@ -20,7 +20,9 @@ class @Colorthrower extends @Tool
     @shadow.visible = @icon.visible = true
 
   cleanUp: ->
-    @paintSplats = @paintBalls = super([@paintBalls,@paintSplats])
+    super([@paintBalls,@paintSplats])
+    @paintSplats = []
+    @paintBalls = []
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/colorthrower.png")
