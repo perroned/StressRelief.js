@@ -54,6 +54,7 @@ class @Tool
   App.tools.push (new Machinegun "Machinegun")
   App.tools.push (new Flamethrower "Flamethrower")
   App.tools.push (new Colorthrower "Colorthrower")
+  App.tools.push (new Phaser "Phaser")
   App.tools.push (new Stamper "Stamper")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
