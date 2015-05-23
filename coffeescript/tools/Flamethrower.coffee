@@ -77,7 +77,7 @@ class @Flamethrower extends @Tool
         else
           fireball.position.x -= 1
           fireball.position.y -= 1
-          fireball.scale.x = fireball.scale.y += 0.009
+          fireball.scale.x = fireball.scale.y += 0.006
 
       # animate the fire ball
       fireball.direction += fireball.turnSpeed * 0.01
