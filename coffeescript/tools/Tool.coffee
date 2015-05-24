@@ -69,6 +69,29 @@ class @Tool
   App.tools.push (new Explosion "Explosion")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
+  setupToolsMenu()
+
+@setupToolsMenu = ->
+  i = 0
+  el = ''
+  while i < App.tools.length
+    tool = App.tools[i]
+    el += '<tr>' if i % 3 is 0 or i is 0
+    el += "<td class=\"toolSelector\" data-toolSelector=#{i}>"
+    el += '<div id=\'b\'>'
+    el += "<img src=\"resources/images/tools/tools/#{tool.name}.png\">"
+    el += '<br/>'
+    el += "<p id=\"title\">#{i+1}: #{tool.name}</p>"
+    el += '</div>'
+    el += '</td>'
+    el += '</tr>' if (i+1) % 3 is 0 or i is App.tools.length-1
+    i++
+
+  $('#ToolsMenu').append el
+
+  $(".toolSelector").click ->
+    $('#ToolsModal').foundation('reveal', 'close');
+    changeTool parseInt(@getAttribute('data-toolSelector'))
 
 @showTool = (isActive) ->
   for tool, i in App.tools

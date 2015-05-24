@@ -2,12 +2,13 @@
 @App = @App or {}
 
 @init = ->
-  App.registerKeys();
+  $('#ToolsModal').foundation('reveal', 'open');
   App.sound = {}
   setupScene()
   setupFish()
   setupTools()
-  setupHitbox();
+  App.registerKeys()
+  setupHitbox()
 
   @animate = ->
     animateFish()

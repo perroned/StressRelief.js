@@ -32,6 +32,10 @@ App.keyboard = (keyCode) ->
   key
 
 App.registerKeys = ->
+  # escape key
+  App.keyboard(27).release = ->
+    $('#ToolsModal').foundation('reveal', ("close" if $("#ToolsModal").is(":visible")) or "open")
+
   App.keyboard(49).press = -> changeTool(0)
   App.keyboard(50).press = -> changeTool(1)
   App.keyboard(51).press = -> changeTool(2)
