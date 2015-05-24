@@ -48,7 +48,17 @@ class @Tool
 
 @setupTools = ->
   App.tools = []
-  App.currentTool = 0
+  App.ToolEnum =
+    HAMMER: 0
+    CHAINSAW: 1
+    MACHINEGUN: 2
+    FLAMETHROWER: 3
+    COLORTHROWER: 4
+    PHASER: 5
+    STAMPER: 6
+    EXPLOSION: 7
+  App.currentTool = App.ToolEnum.HAMMER
+
   App.tools.push (new Hammer "Hammer")
   App.tools.push (new Chainsaw "Chainsaw")
   App.tools.push (new Machinegun "Machinegun")
@@ -56,6 +66,7 @@ class @Tool
   App.tools.push (new Colorthrower "Colorthrower")
   App.tools.push (new Phaser "Phaser")
   App.tools.push (new Stamper "Stamper")
+  App.tools.push (new Explosion "Explosion")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
 

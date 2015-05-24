@@ -58,6 +58,7 @@ class @Machinegun extends @Tool
         damage.position.y = mCoords.y+offsetY
         @damages.push damage
         App.pondContainer.addChild(damage)
+        App.tools[App.ToolEnum.EXPLOSION].newExplosion(posX: damage.position.x, posY: damage.position.y, removeAfterDone: true, scale: 0.1)
 
         # produce random jitter for the gun and shadow while shooting
         offsetX = randNum(-5, 5)
