@@ -8,20 +8,14 @@ class @Chainsaw extends @Tool
     @switchOff()
     @sound_Rev false
     @sound_Cut true
-    @cutIcon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw_cut.png")
-    mCoords = App.stage.getMousePosition()
-    @cutIcon.position.y = mCoords.y-40
-    @cutIcon.position.x = mCoords.x
-    @cutIcon.scale.x = @cutIcon.scale.y = .5
-    App.pondContainer.addChild @cutIcon
+    @cutIcon.visible = true
 
   actionFinish: ->
     super()
-    App.pondContainer.removeChild @cutIcon
-    @cutIcon = null
     @switchOn()
     @sound_Cut false
     @sound_Rev true
+    @cutIcon.visible = false
 
   cleanUp: ->
     super()
@@ -37,6 +31,13 @@ class @Chainsaw extends @Tool
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
     @shadow.alpha = 0.5
+
+    @cutIcon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw_cut.png")
+    mCoords = App.stage.getMousePosition()
+    @cutIcon.position.y = mCoords.y-40
+    @cutIcon.position.x = mCoords.x
+    @cutIcon.scale.x = @cutIcon.scale.y = .5
+    App.pondContainer.addChild @cutIcon
 
   showShadow: (mCoords) ->
     @shadow.position.y = mCoords.y+20
@@ -79,6 +80,7 @@ class @Chainsaw extends @Tool
 
   switchOff: ->
     super()
+    @cutIcon.visible = false
     @sound_Cut false
     @sound_Rev false
 
