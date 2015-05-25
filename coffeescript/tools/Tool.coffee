@@ -89,8 +89,12 @@ class @Tool
 
   $('#ToolsMenu').append el
 
-  $(".toolSelector").click ->
+  $("#cleanScreen").click ->
+    cleanupDamage()
     $('#ToolsModal').foundation('reveal', 'close');
+
+  $(".toolSelector").click ->
+    $('#ToolsModal').foundation('reveal', 'close')
     changeTool parseInt(@getAttribute('data-toolSelector'))
 
 @showTool = (isActive) ->

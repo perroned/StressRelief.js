@@ -10,6 +10,19 @@ body {
   padding: 0px !important;
 }
 
+#ToolsModal {
+  background-color: rgb(39, 0, 97);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#ToolsModal button {
+  margin: 5px;
+  padding: 5px;
+}
+
 #ToolsMenuContainer {
   border: 2px solid yellow;
   display: table;
