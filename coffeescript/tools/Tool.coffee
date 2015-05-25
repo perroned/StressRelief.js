@@ -56,7 +56,7 @@ class @Tool
     COLORTHROWER: 4
     PHASER: 5
     STAMPER: 6
-    EXPLOSION: 7
+    EXPLODER: 7
   App.currentTool = App.ToolEnum.HAMMER
 
   App.tools.push (new Hammer "Hammer")
@@ -66,7 +66,7 @@ class @Tool
   App.tools.push (new Colorthrower "Colorthrower")
   App.tools.push (new Phaser "Phaser")
   App.tools.push (new Stamper "Stamper")
-  App.tools.push (new Explosion "Explosion")
+  App.tools.push (new Exploder "Exploder")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
   setupToolsMenu()

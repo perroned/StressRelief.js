@@ -1,4 +1,4 @@
-class @Explosion extends @Animator
+class @Exploder extends @Animator
   constructor: (@name) ->
     @spriteSheet = "SpriteSheet"
     @spriteName = "Explosion_Sequence_A"
