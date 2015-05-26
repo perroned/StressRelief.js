@@ -36,11 +36,21 @@ App.registerKeys = ->
   App.keyboard(27).release = ->
     $('#ToolsModal').foundation('reveal', ("close" if $("#ToolsModal").is(":visible")) or "open")
 
-  App.keyboard(49).press = -> changeTool(0)
-  App.keyboard(50).press = -> changeTool(1)
-  App.keyboard(51).press = -> changeTool(2)
-  App.keyboard(52).press = -> changeTool(3)
-  App.keyboard(53).press = -> changeTool(4)
-  App.keyboard(54).press = -> changeTool(5)
-  App.keyboard(55).press = -> changeTool(6)
-  App.keyboard(56).press = -> changeTool(7)
+  # 1
+  App.keyboard(49).press = -> changeTool(App.ToolEnum.HAMMER)
+  # 2
+  App.keyboard(50).press = -> changeTool(App.ToolEnum.CHAINSAW)
+  # 3
+  App.keyboard(51).press = -> changeTool(App.ToolEnum.MACHINEGUN)
+  # 4
+  App.keyboard(52).press = -> changeTool(App.ToolEnum.FLAMETHROWER)
+  # 5
+  App.keyboard(53).press = -> changeTool(App.ToolEnum.COLORTHROWER)
+  # 6
+  App.keyboard(54).press = -> changeTool(App.ToolEnum.PHASER)
+  # 7
+  App.keyboard(55).press = -> changeTool(App.ToolEnum.STAMPER)
+  # 8
+  App.keyboard(56).press = -> changeTool(App.ToolEnum.EXPLODER)
+  # 9
+  App.keyboard(57).press = -> changeTool(App.ToolEnum.TERMITES)

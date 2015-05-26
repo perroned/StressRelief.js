@@ -57,6 +57,7 @@ class @Tool
     PHASER: 5
     STAMPER: 6
     EXPLODER: 7
+    TERMITES: 8
   App.currentTool = App.ToolEnum.HAMMER
 
   App.tools.push (new Hammer "Hammer")
@@ -67,6 +68,7 @@ class @Tool
   App.tools.push (new Phaser "Phaser")
   App.tools.push (new Stamper "Stamper")
   App.tools.push (new Exploder "Exploder")
+  App.tools.push (new Termites "Termites")
   (tool.loadTool(); tool.switchOff()) for tool in App.tools
   @changeTool(App.currentTool)
   setupToolsMenu()
