@@ -14,14 +14,13 @@ class @Animator extends @Tool
     @animations = super([@animations])
 
   loadTool: ->
-    assetsToLoader = [ "resources/images/tools/damage/#{@spriteSheet}.json"];
+    assetsToLoader = ["resources/images/tools/damage/#{@spriteSheet}.json"];
     # create a new loader
     loader = new PIXI.AssetLoader(assetsToLoader);
     # use callback
     loader.onComplete = =>
       i = 0
       while i < @spriteCount
-        # texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i+1) + ".png");
         texture = PIXI.Texture.fromFrame("#{@spriteName}" + (i+1) + ".png");
         @animationTextures.push(texture);
         i++
@@ -38,7 +37,7 @@ class @Animator extends @Tool
     @shadow.alpha = 0.5
     super()
 
-  newAnimation: (config)->
+  newAnimation: (config) ->
     animation = new PIXI.MovieClip(@animationTextures);
     animation.position.x = config.posX
     animation.position.y = config.posY
@@ -51,8 +50,9 @@ class @Animator extends @Tool
     animation.loop = config.loop
     animation.animationSpeed = config.animationSpeed
     animation.removeAfterDone = config.removeAfterDone
-    @animations.push animation
-
+    if not config.getHandle
+      @animations.push animation
+    animation
 
   showShadow: (mCoords) ->
     super()
