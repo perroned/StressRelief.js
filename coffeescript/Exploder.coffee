@@ -1,14 +1,14 @@
 class @Exploder extends @Animator
   constructor: (@name) ->
     @spriteSheet = "SpriteSheet"
-    @spriteName = "Explosion_Sequence_A"
+    @spriteName = "Explosion_Sequence_A "
     @spriteCount = 26
     super(@name, @spriteSheet, @spriteName, @spriteCount)
 
   actionStart: ->
     super()
     mCoords = App.stage.getMousePosition()
-    @newExplosion(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 0.3)
+    @newExplosion(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 0.3, loop: false, animationSpeed: 1)
 
   actionFinish: ->
     super()

@@ -22,7 +22,7 @@ class @Animator extends @Tool
       i = 0
       while i < @spriteCount
         # texture = PIXI.Texture.fromFrame("Explosion_Sequence_A " + (i+1) + ".png");
-        texture = PIXI.Texture.fromFrame("#{@spriteName} " + (i+1) + ".png");
+        texture = PIXI.Texture.fromFrame("#{@spriteName}" + (i+1) + ".png");
         @animationTextures.push(texture);
         i++
 
@@ -44,11 +44,12 @@ class @Animator extends @Tool
     animation.position.y = config.posY
     animation.anchor.x = 0.5;
     animation.anchor.y = 0.5;
-    animation.rotation = Math.random() * Math.PI;
+    # animation.rotation = Math.random() * Math.PI;
     animation.scale.x = animation.scale.y = config.scale
     animation.gotoAndPlay(0);
     App.pondContainer.addChild(animation);
-    animation.loop = false
+    animation.loop = config.loop
+    animation.animationSpeed = config.animationSpeed
     animation.removeAfterDone = config.removeAfterDone
     @animations.push animation
 
