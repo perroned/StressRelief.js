@@ -9,6 +9,7 @@ class @Tool
   actionFinish: -> @pressed = false
   cleanUp: (additional) ->
     additional ?= []
+    @damages ?= []
     for d in ([@damages].concat additional)
       i = 0
       while i < d.length
@@ -30,11 +31,9 @@ class @Tool
   showTool: ->
   switchOff: ->
     @shadow.visible = @icon.visible = false
-    App?.sound?.stop?()
 
   switchOn: ->
     @shadow.visible = @icon.visible = true
-    App?.sound?.stop?()
 
 @changeTool = (selection) ->
   App.tools[App.currentTool].switchOff()

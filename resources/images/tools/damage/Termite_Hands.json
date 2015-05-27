@@ -1,6 +1,6 @@
 {"frames": {
 
-"Termite_0.png":
+"Termite_Hand_0.png":
 {
 	"frame": {"x":2,"y":2,"w":72,"h":65},
 	"rotated": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":72,"h":65},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Termite_1.png":
+"Termite_Hand_1.png":
 {
 	"frame": {"x":76,"y":2,"w":72,"h":65},
 	"rotated": false,
@@ -18,7 +18,7 @@
 	"sourceSize": {"w":72,"h":65},
 	"pivot": {"x":0.5,"y":0.5}
 },
-"Termite_2.png":
+"Termite_Hand_2.png":
 {
 	"frame": {"x":150,"y":2,"w":72,"h":65},
 	"rotated": false,
@@ -30,10 +30,10 @@
 "meta": {
 	"app": "http://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "Termites.png",
+	"image": "Termite_Hands.png",
 	"format": "RGBA8888",
 	"size": {"w":224,"h":69},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:14d0999f4a97d3248f70286bdf06b211:a3e3b08d866e60b2f1ebe2072bbaeb58:4fb0168d178ee14df80d18997d8da0a5$"
+	"smartupdate": "$TexturePacker:SmartUpdate:41f05b365cb17e7e7a50fcff270452ff:a3e3b08d866e60b2f1ebe2072bbaeb58:87c10878db5baa3dfabffd88a92b55c7$"
 }
 }

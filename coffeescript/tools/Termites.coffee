@@ -1,44 +1,40 @@
 class @Termites extends @Animator
   constructor: (@name) ->
-    @cursor = null
-    @spriteSheet = "Termites"
-    @spriteName = "Termite_"
+    @spriteSheet = "Termite_Hands"
+    @spriteName = "Termite_Hand_"
     @spriteCount = 2
+    @termites = []
     super(@name, @spriteSheet, @spriteName, @spriteCount)
 
   actionStart: ->
-
-    # super()
+    super()
     mCoords = App.stage.getMousePosition()
-    # @cursor = @newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 1, loop: true, animationSpeed: .1, getHandle: true)
     @newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 1, loop: true, animationSpeed: .1, getHandle: false)
 
   actionFinish: ->
-    # super()
+    super()
 
   cleanUp: ->
-    # @explosions = super([@explosions])
+    super()
 
   loadTool: ->
     super()
-    @icon.visible = @shadow.visible = false
+    App.stage.removeChild(@shadow)
+    App.stage.removeChild(@icon)
 
   showShadow: (mCoords) ->
-    # super()
+    super()
 
   showTool: (isActive) ->
-    # super()
     if isActive
       mCoords = App.stage.getMousePosition()
-      @cursor?.position?.y = mCoords.y
-      @cursor?.position?.x = mCoords.x
+      @icon?.position?.y = mCoords.y
+      @icon?.position?.x = mCoords.x
 
   switchOff: ->
-    # super()
-    @cursor?.visible = false
+    super()
 
   switchOn: ->
-    # super()
     mCoords = App.stage.getMousePosition()
-    @cursor ?= @newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 1, loop: true, animationSpeed: .1, getHandle: true)
-    @cursor?.visible = true
+    @icon = @newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 1, loop: true, animationSpeed: .1, getHandle: true)
+    super()

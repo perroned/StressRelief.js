@@ -10,7 +10,7 @@ class @Animator extends @Tool
   actionFinish: ->
     super()
 
-  cleanUp: ->
+  cleanUp: () ->
     @animations = super([@animations])
 
   loadTool: ->
@@ -43,7 +43,6 @@ class @Animator extends @Tool
     animation.position.y = config.posY
     animation.anchor.x = 0.5;
     animation.anchor.y = 0.5;
-    # animation.rotation = Math.random() * Math.PI;
     animation.scale.x = animation.scale.y = config.scale
     animation.gotoAndPlay(0);
     App.pondContainer.addChild(animation);

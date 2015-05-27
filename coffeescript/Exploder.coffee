@@ -14,7 +14,7 @@ class @Exploder extends @Animator
     super()
 
   cleanUp: ->
-    @explosions = super([@explosions])
+    super()
 
   loadTool: ->
     @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
@@ -41,4 +41,4 @@ class @Exploder extends @Animator
     super()
 
   switchOn: ->
-    # super()
+    @switchOff()
