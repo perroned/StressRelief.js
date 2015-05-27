@@ -1,0 +1,39 @@
+{"frames": {
+
+"Termite_0.png":
+{
+	"frame": {"x":2,"y":2,"w":27,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":14},
+	"sourceSize": {"w":27,"h":14},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Termite_1.png":
+{
+	"frame": {"x":2,"y":18,"w":27,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":14},
+	"sourceSize": {"w":27,"h":14},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"Termite_2.png":
+{
+	"frame": {"x":2,"y":34,"w":27,"h":14},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":14},
+	"sourceSize": {"w":27,"h":14},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Termites.png",
+	"format": "RGBA8888",
+	"size": {"w":31,"h":50},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e32de04d2b88e7819709ddf6731bb340:7046051593acb5d37e5dddeaf9314711:4fb0168d178ee14df80d18997d8da0a5$"
+}
+}
