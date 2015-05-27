@@ -8,7 +8,7 @@ class @Exploder extends @Animator
   actionStart: ->
     super()
     mCoords = App.stage.getMousePosition()
-    @newExplosion(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scale: 0.3, loop: false, animationSpeed: 1, getHandle: false)
+    @newExplosion(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: 0.3, scaleY: 0.3, loop: false, animationSpeed: 1, getHandle: false)
 
   actionFinish: ->
     super()

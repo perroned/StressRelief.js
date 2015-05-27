@@ -43,7 +43,8 @@ class @Animator extends @Tool
     animation.position.y = config.posY
     animation.anchor.x = 0.5;
     animation.anchor.y = 0.5;
-    animation.scale.x = animation.scale.y = config.scale
+    animation.scale.x = config.scaleX
+    animation.scale.y = config.scaleY
     animation.gotoAndPlay(0);
     App.pondContainer.addChild(animation);
     animation.loop = config.loop
