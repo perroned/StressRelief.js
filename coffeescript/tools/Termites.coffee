@@ -1,16 +1,23 @@
 class @Termites extends @Animator
   constructor: (@name) ->
+    @directions =
+      LEFT: 0
+      UP: 1
+      RIGHT: 2
+      DOWN: 3
     @termiteAnimator = null
     @spriteSheet = "Termite_Hands"
     @spriteName = "Termite_Hand_"
     @spriteCount = 2
+    @termiteMaxTravel = 20
+    @termiteMovementAmount = 0.1
     super(@name, @spriteSheet, @spriteName, @spriteCount)
 
   actionStart: ->
     super()
     mCoords = App.stage.getMousePosition()
-    termiteScale = if randNum(0,10) > 5 then -1 else 1
-    @termiteAnimator.newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: termiteScale, scaleY: 1, loop: true, animationSpeed: .1, getHandle: false)
+    t = @termiteAnimator.newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: 1, scaleY: 1, loop: true, animationSpeed: .1, getHandle: true)
+    @redirectTermite (@termiteAnimator.animations.push t)-1
 
   actionFinish: ->
     super()
@@ -28,6 +35,24 @@ class @Termites extends @Animator
     App.stage.removeChild(@termiteAnimator.shadow)
     App.stage.removeChild(@termiteAnimator.icon)
 
+  redirectTermite: (index) ->
+    termite = @termiteAnimator.animations[index]
+    termite.movementRemaining = randNum(1, @termiteMaxTravel)
+    termite.direction = randNum(0, Object.keys(@directions).length+1)
+    switch termite.direction
+      when @directions.LEFT
+        termite.scale.x *= -1
+        termite.rotation = 0
+      when @directions.UP
+        termite.rotation = -(45 * (Math.PI / 2))
+        termite.scale.x = Math.abs termite.scale.x
+      when @directions.DOWN
+        termite.rotation = (45 * (Math.PI / 2))
+        termite.scale.x = Math.abs termite.scale.x
+      when @directions.RIGHT
+        termite.scale.x = Math.abs termite.scale.x
+        termite.rotation = 0
+
   showShadow: (mCoords) ->
     super()
 
@@ -40,12 +65,18 @@ class @Termites extends @Animator
     i = 0
     while i < @termiteAnimator?.animations.length
       termite = @termiteAnimator.animations[i]
-      if termite.scale.x is -1
-        termite.position.x -= .1
-      else
-        termite.position.x += .1
-      i++
+      # reached end of travels
+      if termite.movementRemaining <= 0
+        @redirectTermite i
 
+      switch termite.direction
+        when @directions.LEFT then termite.position.x -= @termiteMovementAmount
+        when @directions.UP then termite.position.y -= @termiteMovementAmount
+        when @directions.DOWN then termite.position.y += @termiteMovementAmount
+        when @directions.RIGHT then termite.position.x += @termiteMovementAmount
+      #
+      termite.movementRemaining -= @termiteMovementAmount
+      i++
 
   switchOff: ->
     super()
