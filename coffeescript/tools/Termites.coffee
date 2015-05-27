@@ -41,7 +41,6 @@ class @Termites extends @Animator
     termite.direction = randNum(0, Object.keys(@directions).length+1)
     switch termite.direction
       when @directions.LEFT
-        termite.scale.x *= -1
         termite.rotation = 0
       when @directions.UP
         termite.rotation = -(45 * (Math.PI / 2))
