@@ -15,14 +15,20 @@
   App.pondContainer = new (PIXI.DisplayObjectContainer)
   App.stage.addChild App.pondContainer
   App.stage.interactive = true
-  # bg = PIXI.Sprite.fromImage('resources/images/displacement_BG.jpg')
-  # App.pondContainer.addChild bg
+  App.backgroundColor = PIXI.Sprite.fromImage('resources/images/background.png')
+  App.backgroundColor.width = window.innerWidth
+  App.backgroundColor.height = window.innerHeight
+  App.pondContainer.addChild App.backgroundColor
+  bg = PIXI.Sprite.fromImage('resources/images/displacement_BG.jpg')
+  App.pondContainer.addChild bg
 
 @resize = ->
   App.renderer.resize(window.innerWidth, window.innerHeight)
   App.renderer.view.style.width = window.innerWidth + 'px'
   App.renderer.view.style.height = window.innerHeight + 'px'
   App.hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+  App.backgroundColor.width = window.innerWidth
+  App.backgroundColor.height = window.innerHeight
 
 @setupRenderer = ->
   # use Canvas, because WebGL is broke
