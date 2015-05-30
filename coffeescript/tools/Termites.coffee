@@ -1,5 +1,6 @@
 class @Termites extends @Animator
   constructor: (@name) ->
+    App.sound.termite_noise = null
     @directions = LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3
     @termiteAnimator = null
     @spriteSheet = "Termite_Hands"
@@ -15,6 +16,10 @@ class @Termites extends @Animator
     mCoords = App.stage.getMousePosition()
     t = @termiteAnimator.newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: 1, scaleY: 1, loop: true, animationSpeed: .1, getHandle: true)
     @redirectTermite (@termiteAnimator.animations.push t)-1
+    App.sound.termite_noise ?= new Howl({
+      urls: ['resources/sounds/termite.ogg']
+      loop: true
+    }).play()
 
   actionFinish: ->
     super()
@@ -89,6 +94,10 @@ class @Termites extends @Animator
       #
       termite.movementRemaining -= @termiteMovementAmount
       i++
+
+    if @termiteAnimator?.animations.length is 0
+      App.sound.termite_noise?.stop?()
+      App.sound.termite_noise = null
 
   switchOff: ->
     super()
