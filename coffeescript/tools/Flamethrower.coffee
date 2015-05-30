@@ -74,6 +74,7 @@ class @Flamethrower extends @Tool
       if not fireball.landed
         if fireball.position.y < (fireball.startY-Flamethrower.SHOOT_DISTANCE) and fireball.position.x < (fireball.startX-Flamethrower.SHOOT_DISTANCE)
           fireball.landed = true
+          App.tools[App.ToolEnum.TERMITES].termiteCheck(fireball)
         else
           fireball.position.x -= 1
           fireball.position.y -= 1

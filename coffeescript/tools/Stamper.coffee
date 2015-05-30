@@ -11,6 +11,7 @@ class @Stamper extends @Tool
     mCoords = App.stage.getMousePosition()
     damage.position.y = mCoords.y+@dropAmount+10
     damage.position.x = mCoords.x
+    App.tools[App.ToolEnum.TERMITES].termiteCheck(damage)
     @damages.push damage
     App.pondContainer.addChild damage
     @icon.position.y = @icon.position.y + @dropAmount

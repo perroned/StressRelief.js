@@ -5,6 +5,8 @@ class @Chainsaw extends @Tool
 
   actionStart: ->
     super()
+    mCoords = App.stage.getMousePosition()
+    App.tools[App.ToolEnum.TERMITES].termiteCheck({width:10,height:10, position: {x: mCoords.x, y:mCoords.y}})
     @switchOff()
     @sound_Rev false
     @sound_Cut true

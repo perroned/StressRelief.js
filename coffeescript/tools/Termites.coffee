@@ -103,8 +103,8 @@ class @Termites extends @Animator
     while i < @termiteAnimator?.animations.length
       termite = @termiteAnimator.animations[i]
       offset = 10
-      damageBox = {x: damage.position.x - offset, y: damage.position.y - offset, width: damage.width + offset, height: damage.height + offset}
-      termiteBox = {x: termite.position.x - offset, y: termite.position.y - offset, width: termite.width + offset, height: termite.height + offset}
+      damageBox = {x: damage.position.x - offset, y: damage.position.y - offset, width: damage.width + offset*2, height: damage.height + offset}
+      termiteBox = {x: termite.position.x - offset, y: termite.position.y - offset, width: termite.width + offset*2, height: termite.height + offset}
 
       if (damageBox.x < termiteBox.x + termiteBox.width &&
         damageBox.x + damageBox.width > termiteBox.x &&

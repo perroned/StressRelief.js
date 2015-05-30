@@ -6,6 +6,8 @@ class @Phaser extends @Tool
 
   actionStart: ->
     super()
+    mCoords = App.stage.getMousePosition()
+    App.tools[App.ToolEnum.TERMITES].termiteCheck({width:10,height:10, position: {x: mCoords.x, y:mCoords.y}})
     @crosshairs.visible = false
     @flash.visible = true
     @finish = Date.now() + @duration
