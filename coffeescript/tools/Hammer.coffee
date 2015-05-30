@@ -6,11 +6,12 @@ class @Hammer extends @Tool
 
   actionStart: ->
     super()
+    mCoords = App.stage.getMousePosition()
     damage = PIXI.Sprite.fromImage("resources/images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .6
-    mCoords = App.stage.getMousePosition()
     damage.position.y = mCoords.y
     damage.position.x = mCoords.x
+    App.tools[App.ToolEnum.TERMITES].termiteCheck(damage)
     damage.anchor.x = damage.anchor.y = .5
     damage.rotation = Math.random()*360
     @damages.push damage

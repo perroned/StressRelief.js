@@ -7,6 +7,7 @@ class @Termites extends @Animator
     @spriteCount = 2
     @termiteMaxTravel = 20
     @termiteMovementAmount = 0.1
+    @termiteSplats = []
     super(@name, @spriteSheet, @spriteName, @spriteCount)
 
   actionStart: ->
@@ -21,6 +22,20 @@ class @Termites extends @Animator
   cleanUp: ->
     @termiteAnimator.cleanUp()
     super()
+    @termiteSplats = Tool::cleanUp([@termiteSplats])
+
+  killTermite: (i) ->
+    termite = @termiteAnimator.animations[i]
+    posX = termite.position.x
+    posY = termite.position.y
+    App.pondContainer.removeChild(termite);
+    @termiteAnimator.animations.splice(i,1)
+    termite = PIXI.Sprite.fromImage("resources/images/tools/damage/termite_splat.png")
+    termite.scale.x = termite.scale.y = 1.5
+    termite.position.y = posY
+    termite.position.x = posX
+    @termiteSplats.push(termite)
+    App.pondContainer.addChild(termite);
 
   loadTool: ->
     super()
@@ -82,3 +97,18 @@ class @Termites extends @Animator
     mCoords = App.stage.getMousePosition()
     @icon = @newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: 1, scaleY: 1, loop: true, animationSpeed: .1, getHandle: true)
     super()
+
+  termiteCheck: (damage) ->
+    i = 0
+    while i < @termiteAnimator?.animations.length
+      termite = @termiteAnimator.animations[i]
+      offset = 10
+      damageBox = {x: damage.position.x - offset, y: damage.position.y - offset, width: damage.width + offset, height: damage.height + offset}
+      termiteBox = {x: termite.position.x - offset, y: termite.position.y - offset, width: termite.width + offset, height: termite.height + offset}
+
+      if (damageBox.x < termiteBox.x + termiteBox.width &&
+        damageBox.x + damageBox.width > termiteBox.x &&
+        damageBox.y < termiteBox.y + termiteBox.height &&
+        damageBox.height + damageBox.y > termiteBox.y)
+          @killTermite i
+      i++
