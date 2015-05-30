@@ -2,22 +2,23 @@
 @App = @App or {}
 
 @init = ->
-  $('#ToolsModal').foundation('reveal', 'open');
-  App.sound = {}
-  setupScene()
-  setupFish()
-  setupTools()
-  App.registerKeys()
-  setupHitbox()
+  window.onload = ->
+    $('#ToolsModal').foundation('reveal', 'open');
+    App.sound = {}
+    setupScene()
+    setupFish()
+    setupTools()
+    App.registerKeys()
+    setupHitbox()
 
-  @animate = ->
-    animateFish()
-    showTool()
-    App.renderer.render App.stage
+    @animate = ->
+      animateFish()
+      showTool()
+      App.renderer.render App.stage
+      requestAnimFrame animate
+      return
+
     requestAnimFrame animate
-    return
-
-  requestAnimFrame animate
 
 animateFish = ->
   i = 0
