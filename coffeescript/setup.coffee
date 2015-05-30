@@ -36,7 +36,7 @@
   App.renderer.view.style.width = window.innerWidth + 'px'
   App.renderer.view.style.height = window.innerHeight + 'px'
   App.renderer.view.style.display = 'block'
-  # # add render view to DOM
+  # add render view to DOM
   document.body.appendChild App.renderer.view
   window.addEventListener('resize', resize, false)
 
