@@ -32,7 +32,7 @@
 @setupScene = ->
   setupRenderer()
   # create an new instance of a pixi stage
-  App.stage = new (PIXI.Stage)(0xFF0000, true)
+  App.stage = new (PIXI.Stage)(0x000000, true)
   App.pondContainer = new (PIXI.DisplayObjectContainer)
   App.stage.addChild App.pondContainer
   App.stage.interactive = true
@@ -43,7 +43,7 @@
 
 @setupRenderer = ->
   # use Canvas, because WebGL is broke
-  App.renderer = new PIXI.CanvasRenderer(630, 410)
+  App.renderer = new PIXI.CanvasRenderer(window.innerWidth, window.innerHeight)
   App.renderer.view.style.position = 'absolute'
   App.renderer.view.style.width = window.innerWidth + 'px'
   App.renderer.view.style.height = window.innerHeight + 'px'
