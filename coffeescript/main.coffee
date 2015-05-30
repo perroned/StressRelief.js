@@ -6,38 +6,17 @@
     $('#ToolsModal').foundation('reveal', 'open');
     App.sound = {}
     setupScene()
-    setupFish()
     setupTools()
     App.registerKeys()
     setupHitbox()
 
     @animate = ->
-      animateFish()
       showTool()
       App.renderer.render App.stage
       requestAnimFrame animate
       return
 
     requestAnimFrame animate
-
-animateFish = ->
-  i = 0
-  while i < App.fishs.length
-    fish = App.fishs[i]
-    fish.direction += fish.turnSpeed * 0.01
-    fish.position.x += Math.sin(fish.direction) * fish.speed
-    fish.position.y += Math.cos(fish.direction) * fish.speed
-    fish.rotation = -fish.direction - (Math.PI / 2)
-    # wrap..
-    if fish.position.x < App.bounds.x
-      fish.position.x += App.bounds.width
-    if fish.position.x > App.bounds.x + App.bounds.width
-      fish.position.x -= App.bounds.width
-    if fish.position.y < App.bounds.y
-      fish.position.y += App.bounds.height
-    if fish.position.y > App.bounds.y + App.bounds.height
-      fish.position.y -= App.bounds.height
-    i++
 
 logo = ->
   ###
