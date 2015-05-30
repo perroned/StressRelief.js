@@ -36,6 +36,7 @@ class @Tool
     @shadow.visible = @icon.visible = true
 
 @changeTool = (selection) ->
+  $('#ToolsModal').foundation('reveal', "close")
   App.tools[App.currentTool].switchOff()
   App.currentTool = selection
   App.tools[App.currentTool].switchOn()
