@@ -1,11 +1,11 @@
 @setupHitbox = ->
-  hitBox = new PIXI.Graphics();
-  App.stage.addChild hitBox
-  hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
-  hitBox.interactive = true;
-  hitBox.mousedown = (e) ->
+  App.hitBox = new PIXI.Graphics();
+  App.stage.addChild App.hitBox
+  App.hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+  App.hitBox.interactive = true;
+  App.hitBox.mousedown = (e) ->
     App.tools[App.currentTool].actionStart()
-  hitBox.mouseup = (e) ->
+  App.hitBox.mouseup = (e) ->
     App.tools[App.currentTool].actionFinish()
 
 @setupFish = ->
@@ -41,6 +41,12 @@
   padding = 100
   App.bounds = new (PIXI.Rectangle)(-padding, -padding, 630 + padding * 2, 410 + padding * 2)
 
+@resize = ->
+  App.renderer.resize(window.innerWidth, window.innerHeight)
+  App.renderer.view.style.width = window.innerWidth + 'px'
+  App.renderer.view.style.height = window.innerHeight + 'px'
+  App.hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
+
 @setupRenderer = ->
   # use Canvas, because WebGL is broke
   App.renderer = new PIXI.CanvasRenderer(window.innerWidth, window.innerHeight)
@@ -50,3 +56,4 @@
   App.renderer.view.style.display = 'block'
   # # add render view to DOM
   document.body.appendChild App.renderer.view
+  window.addEventListener('resize', resize, false)
