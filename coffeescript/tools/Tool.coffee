@@ -44,7 +44,7 @@ class @Tool
 @cleanupDamage = ->
   for tool in App.tools
     tool.cleanUp()
-  0
+  0 # prevents returning accumulative empty arrays. null can be confusing
 
 @setupTools = ->
   App.tools = []
