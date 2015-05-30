@@ -66,7 +66,7 @@ class @Colorthrower extends @Tool
     App.pondContainer.addChild splatter
     splatter.rotation = Math.random() * Math.PI * 2
     @paintSplats.push splatter
-
+    App.tools[App.ToolEnum.TERMITES].termiteCheck(splatter)
     App.pondContainer.removeChild paintBall
     @paintBalls.splice(i,1)
 
