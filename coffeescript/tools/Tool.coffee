@@ -73,6 +73,27 @@ class @Tool
   @changeTool(App.currentTool)
   setupToolsMenu()
 
+@setupOptionsMenu = ->
+  App.backgroundColors = [
+    'aqua'
+    'blue'
+    'default'
+    'green'
+    'orange'
+    'pink'
+    'purple'
+    'red'
+    'yellow'
+  ]
+  App.backgroundColorImages = []
+  el = ''
+  for color in App.backgroundColors
+    App.backgroundColorImages[color] = PIXI.Sprite.fromImage("resources/images/backgrounds/#{color}.png")
+    el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='resources/images/backgrounds/#{color}.png'/>"
+  $("#secondModal").append el
+  $(".colorSelector").click ->
+    uploadBackgroundColor App.backgroundColorImages[@getAttribute('data-color')]
+
 @setupToolsMenu = ->
   i = 0
   el = ''
@@ -98,6 +119,8 @@ class @Tool
   $(".toolSelector").click ->
     $('#ToolsModal').foundation('reveal', 'close')
     changeTool parseInt(@getAttribute('data-toolSelector'))
+
+  setupOptionsMenu()
 
 @showTool = (isActive) ->
   for tool, i in App.tools

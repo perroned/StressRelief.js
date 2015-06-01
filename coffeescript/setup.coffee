@@ -12,12 +12,14 @@
   setupRenderer()
   # create an new instance of a pixi stage
   App.stage = new (PIXI.Stage)(0xFFFFFF, true)
+  setupHitbox()
   App.pondContainer = new (PIXI.DisplayObjectContainer)
   App.stage.addChild App.pondContainer
   App.stage.interactive = true
   App.backgroundColor = PIXI.Sprite.fromImage('resources/images/backgrounds/default.png')
   App.pondContainer.addChild App.backgroundColor
   uploadBackground('resources/images/displacement_BG.jpg')
+  uploadBackgroundColor App.backgroundColor
 
 @resize = ->
   App.renderer.resize(window.innerWidth, window.innerHeight)
@@ -41,7 +43,13 @@
   window.addEventListener('resize', resize, false)
 
 @uploadBackground = (path) ->
-    App.backgroundImage = PIXI.Sprite.fromImage(path)
-    App.backgroundImage.texture.baseTexture.on 'loaded', ->
-      App.pondContainer.addChild App.backgroundImage
-      resize()
+  App.backgroundImage = PIXI.Sprite.fromImage(path)
+  App.backgroundImage.texture.baseTexture.on 'loaded', ->
+    App.pondContainer.addChild App.backgroundImage
+    resize()
+
+@uploadBackgroundColor = (img) ->
+  App.pondContainer.removeChild App.backgroundColor
+  App.backgroundColor = img
+  App.pondContainer.addChildAt App.backgroundColor, 0
+  resize()

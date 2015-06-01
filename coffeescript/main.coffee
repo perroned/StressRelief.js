@@ -8,7 +8,6 @@
     setupScene()
     setupTools()
     App.registerKeys()
-    setupHitbox()
 
     @animate = ->
       showTool()
