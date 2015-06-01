@@ -84,13 +84,14 @@ class @Tool
     'purple'
     'red'
     'yellow'
+    'white'
   ]
   App.backgroundColorImages = []
   el = ''
   for color in App.backgroundColors
     App.backgroundColorImages[color] = PIXI.Sprite.fromImage("resources/images/backgrounds/#{color}.png")
     el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='resources/images/backgrounds/#{color}.png'/>"
-  $("#secondModal").append el
+  $("#colorChooser").append el
   $(".colorSelector").click ->
     uploadBackgroundColor App.backgroundColorImages[@getAttribute('data-color')]
 

@@ -4,6 +4,15 @@ body {
   padding: 0;
 }
 
+#optionsModal {
+  padding: 10px !important;
+}
+
+#optionsModal #colorChooser {
+  border: 1px solid black;
+  display: inline-block;
+}
+
 .reveal-modal {
   left: 0;
   margin: auto;
