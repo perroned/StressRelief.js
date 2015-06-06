@@ -44,10 +44,15 @@
   window.addEventListener('resize', resize, false)
 
 @uploadBackground = (path) ->
+  (App.pondContainer.removeChild App.backgroundImage) if App.backgroundImage?
   App.backgroundImage = PIXI.Sprite.fromImage(path)
-  App.backgroundImage.texture.baseTexture.on 'loaded', ->
+  if App.backgroundImage.texture.baseTexture.hasLoaded
     App.pondContainer.addChild App.backgroundImage
     resize()
+  else
+    App.backgroundImage.texture.baseTexture.on 'loaded', ->
+      App.pondContainer.addChild App.backgroundImage
+      resize()
 
 @uploadBackgroundColor = (img) ->
   App.pondContainer.removeChild App.backgroundColor
