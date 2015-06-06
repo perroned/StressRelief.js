@@ -34,7 +34,8 @@ App.keyboard = (keyCode) ->
 App.registerKeys = ->
   # escape key
   App.keyboard(27).release = ->
-    $('#ToolsModal').foundation('reveal', ("close" if $("#ToolsModal").is(":visible")) or "open")
+    if not $("#optionsModal").is(":visible")
+      $('#ToolsModal').foundation('reveal', ("close" if $("#ToolsModal").is(":visible")) or "open")
 
   # 1
   App.keyboard(49).press = -> changeTool(App.ToolEnum.HAMMER)
