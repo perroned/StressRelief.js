@@ -92,8 +92,20 @@ class @Tool
     App.backgroundColorImages[color] = PIXI.Sprite.fromImage("resources/images/backgrounds/#{color}.png")
     el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='resources/images/backgrounds/#{color}.png'/>"
   $("#colorChooser").append el
+  $("img[data-color='default']").css('border', '2px solid black')
+
   $(".colorSelector").click ->
+    $("img[data-color=\"#{App.currentBackgroundColor}\"]").css('border', 'none')
+    App.currentBackgroundColor = @getAttribute('data-color')
+    uploadBackgroundColor App.backgroundColorImages[App.currentBackgroundColor]
+    $("img[data-color=\"#{App.currentBackgroundColor}\"]").css('border', '2px solid black')
+
+  $(".colorSelector").mouseover ->
     uploadBackgroundColor App.backgroundColorImages[@getAttribute('data-color')]
+
+  $(document).on 'close.fndtn.reveal', '[data-reveal]', ->
+    if $(@)[0].id is "optionsModal"
+      uploadBackgroundColor App.backgroundColorImages[App.currentBackgroundColor]
 
 @setupToolsMenu = ->
   i = 0
