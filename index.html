@@ -38,11 +38,31 @@
 	</div>
 	<div id="optionsModal" class="reveal-modal" data-reveal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
 		<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-		<h2 id="firstModalTitle">Options</h2>
-		<hr/>
+		<h2 id="firstModalTitle">Options</h2><hr/>
 		<h3 id="firstModalTitle">Choose a color</h3>
-		<div id="colorChooser"></div>
-		<h3 id="firstModalTitle">Choose a background image</h3>
+		<div style="text-align: center;"><div id="colorChooser"></div></div>
+		<div id="backgroundImageForm">
+			<h3>Choose a background image</h3>
+			<table id="imageUploadControls">
+					<tr>
+						<td>
+							<label>Enter image URL<br/>
+								<input type="text" id="imgURLBox" style="width: 235px; padding: 5px;" placeholder="https://domain.com/image.jpeg" />
+							</label>
+						</td>
+						<td>
+							<label><span>Browse Computer</span><br/>
+								<input type="file" style="width: 220px; padding: 5px;" name="datafile" size="40">
+							</label>
+					</td>
+				</tr>
+				<tr>
+					<td colspan=100% style="padding-bottom: 5px; padding-top: 10px;">
+						<button type="button" id="uploadImage" style="font-weight: bold;">Use Image</button>
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 	<script>
 		init()
