@@ -23,18 +23,18 @@ class @Chainsaw extends @Tool
     super()
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw.png")
     @icon.scale.x = @icon.scale.y = .5
     App.stage.addChild(@icon)
 
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw.png")
     @shadow.scale.x = @shadow.scale.y = .5
     App.stage.addChild(@shadow)
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
     @shadow.alpha = 0.5
 
-    @cutIcon = PIXI.Sprite.fromImage("resources/images/tools/tools/chainsaw_cut.png")
+    @cutIcon = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw_cut.png")
     mCoords = App.stage.getMousePosition()
     @cutIcon.position.y = mCoords.y-40
     @cutIcon.position.x = mCoords.x
@@ -52,7 +52,7 @@ class @Chainsaw extends @Tool
       @cutIcon.position.y = mCoords.y-40
       @cutIcon.position.x = mCoords.x
       # cutting
-      damage = PIXI.Sprite.fromImage("resources/images/tools/damage/chainsawDamage.png")
+      damage = PIXI.Sprite.fromImage("../images/tools/damage/chainsawDamage.png")
       damage.scale.x = damage.scale.y = 2
       damage.position.x = mCoords.x
       damage.position.y = mCoords.y
@@ -68,7 +68,7 @@ class @Chainsaw extends @Tool
     App.sound.chainsaw_cut?.stop()
     if start
       App.sound.chainsaw_cut = new Howl({
-        urls: ['resources/sounds/chainsaw_cut.ogg']
+        urls: ['../sounds/chainsaw_cut.ogg']
         loop: true
       }).play()
 
@@ -76,7 +76,7 @@ class @Chainsaw extends @Tool
     App.sound.chainsaw_rev?.stop()
     if start
       App.sound.chainsaw_rev = new Howl({
-        urls: ['resources/sounds/chainsaw_rev.ogg']
+        urls: ['../sounds/chainsaw_rev.ogg']
         loop: true
       }).play()
 

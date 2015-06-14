@@ -17,7 +17,7 @@ class @Termites extends @Animator
     t = @termiteAnimator.newAnimation(posX: mCoords.x, posY: mCoords.y, removeAfterDone: false, scaleX: 1, scaleY: 1, loop: true, animationSpeed: .1, getHandle: true)
     @redirectTermite (@termiteAnimator.animations.push t)-1
     App.sound.termite_noise ?= new Howl({
-      urls: ['resources/sounds/termite.ogg']
+      urls: ['../sounds/termite.ogg']
       loop: true
     }).play()
 
@@ -35,7 +35,7 @@ class @Termites extends @Animator
     posY = termite.position.y
     App.pondContainer.removeChild(termite);
     @termiteAnimator.animations.splice(i,1)
-    termite = PIXI.Sprite.fromImage("resources/images/tools/damage/termite_splat.png")
+    termite = PIXI.Sprite.fromImage("../images/tools/damage/termite_splat.png")
     termite.scale.x = termite.scale.y = 1.5
     termite.position.y = posY
     termite.position.x = posX

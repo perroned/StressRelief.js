@@ -7,7 +7,7 @@ class @Hammer extends @Tool
   actionStart: ->
     super()
     mCoords = App.stage.getMousePosition()
-    damage = PIXI.Sprite.fromImage("resources/images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
+    damage = PIXI.Sprite.fromImage("../images/tools/damage/hammerDamage#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .6
     damage.position.y = mCoords.y
     damage.position.x = mCoords.x
@@ -55,17 +55,17 @@ class @Hammer extends @Tool
     # play noise (harder for the darker the area)
     luminance = @avgColorInHitArea(mCoords)
     if luminance > 30
-      App.sound.hammer_normal = new Howl({urls: ['resources/sounds/hammer_normal.ogg']}).play()
+      App.sound.hammer_normal = new Howl({urls: ['../sounds/hammer_normal.ogg']}).play()
     else if luminance > 15
-      App.sound.hammer_used = new Howl({urls: ['resources/sounds/hammer_used.ogg']}).play()
+      App.sound.hammer_used = new Howl({urls: ['../sounds/hammer_used.ogg']}).play()
     else
-      App.sound.hammer_dead = new Howl({urls: ['resources/sounds/hammer_dead.ogg']}).play()
+      App.sound.hammer_dead = new Howl({urls: ['../sounds/hammer_dead.ogg']}).play()
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @icon.anchor.x = @icon.anchor.y = .5
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515

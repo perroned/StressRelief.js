@@ -17,10 +17,10 @@ class @Exploder extends @Animator
     super()
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @icon.anchor.x = @icon.anchor.y = .5
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515

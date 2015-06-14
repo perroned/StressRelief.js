@@ -13,7 +13,7 @@ class @Phaser extends @Tool
     @finish = Date.now() + @duration
     @phaserAction.visible = true
     App.sound.phaser_shoot = new Howl({
-      urls: ['resources/sounds/phaser.ogg']
+      urls: ['../sounds/phaser.ogg']
     }).play()
 
   actionFinish: ->
@@ -28,15 +28,15 @@ class @Phaser extends @Tool
     super()
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/phaser.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/phaser.png")
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/phaser.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/phaser.png")
     @shadow.scale.x = @shadow.scale.y = .5
-    @crosshairs = PIXI.Sprite.fromImage("resources/images/tools/damage/machinegun_crosshairs2.png")
+    @crosshairs = PIXI.Sprite.fromImage("../images/tools/damage/machinegun_crosshairs2.png")
     @crosshairs.scale.x = @crosshairs.scale.y = .1
-    @flash = PIXI.Sprite.fromImage("resources/images/tools/damage/phaser_beam.png")
+    @flash = PIXI.Sprite.fromImage("../images/tools/damage/phaser_beam.png")
     @flash.scale.x = @flash.scale.y = .6
-    @phaserAction = PIXI.Sprite.fromImage("resources/images/tools/damage/phaser_action.png")
+    @phaserAction = PIXI.Sprite.fromImage("../images/tools/damage/phaser_action.png")
     @phaserAction.visible = false
     @phaserAction.scale.x = @phaserAction.scale.y = .5
     @phaserAction.anchor.x = @phaserAction.anchor.y = .5
@@ -66,7 +66,7 @@ class @Phaser extends @Tool
 
       if @finish > Date.now()
         if @isPressed()
-          damage = PIXI.Sprite.fromImage("resources/images/tools/damage/phaser_damage.png")
+          damage = PIXI.Sprite.fromImage("../images/tools/damage/phaser_damage.png")
           damage.scale.x = damage.scale.y = .5
           damage.position.x = mCoords.x
           damage.position.y = mCoords.y

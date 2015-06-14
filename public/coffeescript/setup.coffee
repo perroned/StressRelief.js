@@ -16,10 +16,10 @@
   App.pondContainer = new (PIXI.DisplayObjectContainer)
   App.stage.addChild App.pondContainer
   App.stage.interactive = true
-  App.backgroundColor = PIXI.Sprite.fromImage('resources/images/backgrounds/default.png')
+  App.backgroundColor = PIXI.Sprite.fromImage('../images/backgrounds/default.png')
   App.currentBackgroundColor = 'default'
   App.pondContainer.addChild App.backgroundColor
-  uploadBackground('resources/images/displacement_BG.jpg')
+  uploadBackground('../images/displacement_BG.jpg')
   uploadBackgroundColor App.backgroundColor
 
 @resize = ->

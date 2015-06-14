@@ -89,8 +89,8 @@ class @Tool
   App.backgroundColorImages = []
   el = ''
   for color in App.backgroundColors
-    App.backgroundColorImages[color] = PIXI.Sprite.fromImage("resources/images/backgrounds/#{color}.png")
-    el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='resources/images/backgrounds/#{color}.png'/>"
+    App.backgroundColorImages[color] = PIXI.Sprite.fromImage("../images/backgrounds/#{color}.png")
+    el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='../images/backgrounds/#{color}.png'/>"
   $("#colorChooser").append el
   $("img[data-color='default']").css('border', '2px solid black')
 
@@ -118,7 +118,7 @@ class @Tool
     el += '<tr>' if i % 3 is 0 or i is 0
     el += "<td class=\"toolSelector\" data-toolSelector=#{i}>"
     el += '<div id=\'b\'>'
-    el += "<img src=\"resources/images/tools/tools/#{tool.name}.png\">"
+    el += "<img src=\"../images/tools/tools/#{tool.name}.png\">"
     el += '<br/>'
     el += "<p id=\"title\">#{i+1}: #{tool.name}</p>"
     el += '</div>'

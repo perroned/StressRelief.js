@@ -14,7 +14,7 @@ class @Animator extends @Tool
     @animations = super([@animations])
 
   loadTool: ->
-    assetsToLoader = ["resources/images/tools/damage/#{@spriteSheet}.json"];
+    assetsToLoader = ["../images/tools/damage/#{@spriteSheet}.json"];
     # create a new loader
     loader = new PIXI.AssetLoader(assetsToLoader);
     # use callback
@@ -27,10 +27,10 @@ class @Animator extends @Tool
 
     #begin load
     loader.load();
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @icon.anchor.x = @icon.anchor.y = .5
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/hammer.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/hammer.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515

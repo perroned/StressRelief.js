@@ -42,10 +42,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-javascript/main.js
-javascript/
-javascript/main.js
+bin/
+node_modules/
 notes.txt
-js/
-style/normalize.css
-style/foundation.min.css
+public/javascript/
+public/javascript_min/
+public/stylesheets/foundation.min.css
+public/stylesheets/normalize.css

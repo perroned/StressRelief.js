@@ -22,9 +22,9 @@ class @Flamethrower extends @Tool
     @sound_Crackle false
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/flamethrower.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/flamethrower.png")
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/flamethrower.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/flamethrower.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
@@ -46,7 +46,7 @@ class @Flamethrower extends @Tool
         # spawn a fireball every 20ms or immediately if there are none
         if ((Date.now()-@lastFireballSpawn) > 20) or @lastFireballSpawn is 0
           @lastFireballSpawn = Date.now()
-          fireball = PIXI.Sprite.fromImage("resources/images/tools/damage/fireball.png")
+          fireball = PIXI.Sprite.fromImage("../images/tools/damage/fireball.png")
           fireball.scale.x = fireball.scale.y = .15
           fireball.position.x = mCoords.x+5
           fireball.position.y = mCoords.y+25
@@ -89,7 +89,7 @@ class @Flamethrower extends @Tool
       # draw a new burn mark for each fireball every 2 seconds
       if fireball.landed and Date.now()-fireball.lastBurn > 2000
         fireball.lastBurn = Date.now()
-        burn = PIXI.Sprite.fromImage("resources/images/tools/damage/fireburn#{randNum(0,2)}.png")
+        burn = PIXI.Sprite.fromImage("../images/tools/damage/fireburn#{randNum(0,2)}.png")
         burn.scale.x = burn.scale.y = .5
         burn.position.x = fireball.position.x
         burn.position.y = fireball.position.y
@@ -111,7 +111,7 @@ class @Flamethrower extends @Tool
     App.sound.flamethrower_spread?.stop()
     if start
       App.sound.flamethrower_spread = new Howl({
-        urls: ['resources/sounds/flamethrower_spread.ogg']
+        urls: ['../sounds/flamethrower_spread.ogg']
         loop: true
       }).play()
 
@@ -119,7 +119,7 @@ class @Flamethrower extends @Tool
     App.sound.flamethrower_crackle?.stop()
     if start
       App.sound.flamethrower_crackle = new Howl({
-        urls: ['resources/sounds/flamethrower_crackle.ogg']
+        urls: ['../sounds/flamethrower_crackle.ogg']
         loop: true
       }).play()
 

@@ -25,9 +25,9 @@ class @Colorthrower extends @Tool
     @paintBalls = []
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/colorthrower.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/colorthrower.png")
     @icon.scale.x = @icon.scale.y = .5
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/colorthrower.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/colorthrower.png")
     @shadow.scale.x = @shadow.scale.y = .5
     # darken the color. Set 50% transparency
     @shadow.tint = 0x151515
@@ -40,7 +40,7 @@ class @Colorthrower extends @Tool
       @lastPaintBall = Date.now()
       # generate a color
       color = randNum(0, Colorthrower.MAX_COLORS)
-      paintBall = PIXI.Sprite.fromImage("resources/images/tools/damage/colorSplats/coloredBlob_#{color}.png")
+      paintBall = PIXI.Sprite.fromImage("../images/tools/damage/colorSplats/coloredBlob_#{color}.png")
       paintBall.color = color
       paintBall.scale.x = paintBall.scale.y = .5
       mCoords = App.stage.getMousePosition()
@@ -50,7 +50,7 @@ class @Colorthrower extends @Tool
       paintBall.startX = paintBall.position.x = mCoords.x
       @paintBalls.push paintBall
       App.sound.paint_shoot = new Howl({
-        urls: ['resources/sounds/paint_shoot.ogg']
+        urls: ['../sounds/paint_shoot.ogg']
       }).play()
       App.sound.who = "colorthrower"
       @lastPaintBall = Date.now()
@@ -58,7 +58,7 @@ class @Colorthrower extends @Tool
   makePaintSplatter: (i) ->
     paintBall = @paintBalls[i]
     # create a splatter based on the paint balls color and a random shape
-    splatter = PIXI.Sprite.fromImage("resources/images/tools/damage/colorSplats/coloredSplat_#{paintBall.color}_#{randNum(0,3)}.png")
+    splatter = PIXI.Sprite.fromImage("../images/tools/damage/colorSplats/coloredSplat_#{paintBall.color}_#{randNum(0,3)}.png")
     splatter.scale.y = splatter.scale.x = .4 + randNum(-1, 2)/20
     splatter.position.y = (paintBall.position.y+15) + randNum(-10,10)
     splatter.position.x = (paintBall.position.x+15) + randNum(-10,10)
@@ -71,7 +71,7 @@ class @Colorthrower extends @Tool
     @paintBalls.splice(i,1)
 
     App.sound.paint_splatter = new Howl({
-      urls: ['resources/sounds/paint_splatter.ogg']
+      urls: ['../sounds/paint_splatter.ogg']
     }).play()
 
   showShadow: (mCoords) ->

@@ -6,7 +6,7 @@ class @Stamper extends @Tool
 
   actionStart: ->
     super()
-    damage = PIXI.Sprite.fromImage("resources/images/tools/damage/stamps/stamp_#{randNum(0, @damageIconCount)}.png")
+    damage = PIXI.Sprite.fromImage("../images/tools/damage/stamps/stamp_#{randNum(0, @damageIconCount)}.png")
     damage.scale.x = damage.scale.y = .5
     mCoords = App.stage.getMousePosition()
     damage.position.y = mCoords.y+@dropAmount+10
@@ -26,14 +26,14 @@ class @Stamper extends @Tool
     super()
 
   handleStampSound: ->
-    App.sound.stamper = new Howl({urls: ['resources/sounds/stamper.ogg']}).play()
+    App.sound.stamper = new Howl({urls: ['../sounds/stamper.ogg']}).play()
 
   loadTool: ->
-    @icon = PIXI.Sprite.fromImage("resources/images/tools/tools/stamper.png")
+    @icon = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
     @icon.anchor.x = @icon.anchor.y = .5
     @icon.scale.x = .7
     @icon.scale.y = .4
-    @shadow = PIXI.Sprite.fromImage("resources/images/tools/tools/stamper.png")
+    @shadow = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
     @shadow.scale.x = .4
     @shadow.scale.y = .7
     @shadow.anchor.x = @shadow.anchor.y = .5
