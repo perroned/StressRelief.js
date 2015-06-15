@@ -12,7 +12,6 @@ class @Machinegun extends @Tool
 	actionFinish: ->
 		super()
 		@switchOn()
-		App.sound.machinegun_shoot = new Howl({urls: ['../sounds/machinegun_shoot.ogg']}).play()
 		@crosshairs.visible = true
 		@flash.visible = false
 
