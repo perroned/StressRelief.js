@@ -1,72 +1,72 @@
 #backgroundImageForm {
-   margin-top: 15px;
+	margin-top: 15px;
 }
 
 body {
-   background-color: #000000;
-   margin: 0;
-   padding: 0;
+	background-color: #000000;
+	margin: 0;
+	padding: 0;
 }
 
 #imageUploadControls {
-   width: 100%;
+	width: 100%;
 }
 
 #imageUploadControls td {
-   text-align: center;
+	text-align: center;
 }
 
 #optionsModal {
-   padding: 10px !important;
+	padding: 10px !important;
 }
 
 #optionsModal #colorChooser {
-   border: 1px solid black;
-   display: inline-block;
+	border: 1px solid black;
+	display: inline-block;
 }
 
 .reveal-modal {
-   left: 0;
-   margin: auto;
-   max-width: none !important;
-   min-height: 0px !important;
-   padding: 0px !important;
-   right: 0;
-   top: 0;
-   width: 545px !important;
+	left: 0;
+	margin: auto;
+	max-width: none !important;
+	min-height: 0px !important;
+	padding: 0px !important;
+	right: 0;
+	top: 0;
+	width: 545px !important;
 }
 
 #ToolsModal {
-   background-color: rgb(39, 0, 97);
-   color: white;
-   font-size: 20px;
-   font-weight: bold;
-   text-align: center;
-   top: 100px;
+	background-color: rgb(39, 0, 97);
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	top: 100px;
 }
 
 #ToolsModal button {
-   margin: 5px;
-   padding: 5px;
+	margin: 5px;
+	padding: 5px;
 }
 
 #ToolsMenuContainer {
-   border: 2px solid yellow;
-   display: table;
-   margin-left: auto;
-   margin-right: auto;
+	border: 2px solid yellow;
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 #ToolsMenu {
-   background-color: rgb(39, 0, 97);
-   color: white;
+	background-color: rgb(39, 0, 97);
+	color: white;
 }
 
 #ToolsMenu td {
-   padding: 10px;
-   text-align: center;
-   width: 180px;
-   height: 180px;
+	padding: 10px;
+	text-align: center;
+	width: 180px;
+	height: 180px;
 }
 
 #ToolsMenu td #b { border: 2px solid rgb(39, 0, 97); }
@@ -74,13 +74,13 @@ body {
 #ToolsMenu td #b:hover { border: 2px solid silver; }
 
 #ToolsMenu img {
-   height: 110px;
-   width: 115px;
+	height: 110px;
+	width: 115px;
 }
 
 #ToolsMenu #title {
-   font-size: 20px;
-   font-weight: bold;
-   margin-bottom: 0px;
-   margin-top: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 0px;
+	margin-top: 10px;
 }
