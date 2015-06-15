@@ -8,6 +8,10 @@ body {
 	padding: 0;
 }
 
+.imageDrag {
+	border: 10px dashed aquamarine !important;
+}
+
 #imageUploadControls {
 	width: 100%;
 }
@@ -83,4 +87,13 @@ body {
 	font-weight: bold;
 	margin-bottom: 0px;
 	margin-top: 10px;
+}
+
+#userPhoto {
+	border: 5px dashed aquamarine;
+	height: 250px;
+	margin: auto;
+	padding-left: 150px;
+	padding-top: 100px;
+	width: 500px;
 }
