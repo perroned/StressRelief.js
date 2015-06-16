@@ -89,8 +89,8 @@ class @Tool
 	App.backgroundColorImages = []
 	el = ''
 	for color in App.backgroundColors
-		App.backgroundColorImages[color] = PIXI.Sprite.fromImage("../images/backgrounds/#{color}.png")
-		el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='../images/backgrounds/#{color}.png'/>"
+		App.backgroundColorImages[color] = PIXI.Sprite.fromImage("../images/backgroundColors/#{color}.png")
+		el += "<img class='colorSelector' data-color=#{color} height='50' width='50' src='../images/backgroundColors/#{color}.png'/>"
 	$("#colorChooser").append el
 	$("img[data-color='default']").css('border', '2px solid black')
 
