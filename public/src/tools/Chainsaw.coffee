@@ -90,3 +90,5 @@ class @Chainsaw extends @Tool
 		super()
 		@sound_Cut false
 		@sound_Rev true
+		App.pondContainer.removeChild @cutIcon
+		App.pondContainer.addChild @cutIcon
