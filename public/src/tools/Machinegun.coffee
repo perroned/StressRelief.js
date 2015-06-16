@@ -99,7 +99,7 @@ class @Machinegun extends @Tool
 			@bullets[i].position.x += 4
 			@bullets[i].anchor.x = @bullets[i].anchor.y = .5
 			@bullets[i].rotation += .3
-			if @bullets[i].position.y > 500
+			if @bullets[i].position.y > window.innerHeight
 				App.pondContainer.removeChild @bullets[i]
 				@bullets.splice(i,1)
 				App.sound.machinegun_bullet_land = new Howl({
