@@ -66,12 +66,12 @@
 	App.backgroundImage = PIXI.Sprite.fromImage(path)
 	if App.backgroundImage.texture.baseTexture.hasLoaded
 		[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
-		App.pondContainer.addChild App.backgroundImage
+		App.pondContainer.addChildAt App.backgroundImage, 1
 		resize()
 	else
 		App.backgroundImage.texture.baseTexture.on 'loaded', ->
 			[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
-			App.pondContainer.addChild App.backgroundImage
+			App.pondContainer.addChildAt App.backgroundImage, 1
 			resize()
 
 @uploadBackgroundColor = (img) ->
