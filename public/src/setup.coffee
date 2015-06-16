@@ -16,9 +16,10 @@
 	App.pondContainer = new (PIXI.DisplayObjectContainer)
 	App.stage.addChild App.pondContainer
 	App.stage.interactive = true
-	App.backgroundColor = PIXI.Sprite.fromImage('../images/backgrounds/default.png')
+	App.backgroundColor = PIXI.Sprite.fromImage('../images/backgroundColors/default.png')
 	App.currentBackgroundColor = 'default'
 	App.pondContainer.addChild App.backgroundColor
+	App.trueBackgroundImage = {}
 	uploadBackground('../images/displacement_BG.jpg')
 	uploadBackgroundColor App.backgroundColor
 
@@ -29,6 +30,23 @@
 	App.hitBox.hitArea = new PIXI.Rectangle(0, 0, window.innerWidth, window.innerHeight);
 	App.backgroundColor.width = window.innerWidth
 	App.backgroundColor.height = window.innerHeight
+	newHeight = newWidth = null
+
+	if App.trueBackgroundImage.width <= App.trueBackgroundImage.height
+		newWidth = window.innerHeight * App.trueBackgroundImage.width / App.trueBackgroundImage.height
+		if window.innerWidth < window.innerWidth
+			newHeight = window.innerHeight * window.innerWidth / newWidth
+			newWidth = window.innerWidth
+		else newHeight = window.innerHeight
+	else
+		newHeight = window.innerWidth * App.trueBackgroundImage.height / App.trueBackgroundImage.width
+		if window.innerHeight < newHeight
+			newWidth = window.innerWidth * window.innerHeight / newHeight
+			newHeight = window.innerHeight
+		else newWidth = window.innerWidth
+	[App.backgroundImage.width, App.backgroundImage.height] = [newWidth, newHeight]
+
+	# center
 	App.backgroundImage.position.x = window.innerWidth/2 - App.backgroundImage.width/2
 	App.backgroundImage.position.y = window.innerHeight/2 - App.backgroundImage.height/2
 
@@ -47,10 +65,12 @@
 	(App.pondContainer.removeChild App.backgroundImage) if App.backgroundImage?
 	App.backgroundImage = PIXI.Sprite.fromImage(path)
 	if App.backgroundImage.texture.baseTexture.hasLoaded
+		[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
 		App.pondContainer.addChild App.backgroundImage
 		resize()
 	else
 		App.backgroundImage.texture.baseTexture.on 'loaded', ->
+			[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
 			App.pondContainer.addChild App.backgroundImage
 			resize()
 
