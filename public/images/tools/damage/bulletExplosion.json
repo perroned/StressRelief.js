@@ -219,7 +219,7 @@
 "meta": {
 	"app": "http://www.texturepacker.com",
 	"version": "1.0",
-	"image": "SpriteSheet.png",
+	"image": "bulletExplosion.png",
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":2048},
 	"scale": "1",

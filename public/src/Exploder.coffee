@@ -1,6 +1,6 @@
 class @Exploder extends @Animator
 	constructor: (@name) ->
-		@spriteSheet = "SpriteSheet"
+		@spriteSheet = "bulletExplosion"
 		@spriteName = "Explosion_Sequence_A "
 		@spriteCount = 26
 		super(@name, @spriteSheet, @spriteName, @spriteCount)
