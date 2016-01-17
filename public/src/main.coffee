@@ -3,8 +3,7 @@
 
 @init = ->
 	window.onload = ->
-		$('#optionsModal').foundation('reveal', 'open');
-		# $('#ToolsModal').foundation('reveal', 'open');
+		$('#ToolsModal').foundation('reveal', 'open');
 		App.sound = {}
 		setupScene()
 		setupTools()
