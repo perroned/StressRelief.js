@@ -136,6 +136,9 @@ class @Tool
 		$('#ToolsModal').foundation('reveal', 'close')
 		changeTool parseInt(@getAttribute('data-toolSelector'))
 
+	$("#saveImageButton").click ->
+		saveImage()
+
 	setupOptionsMenu()
 
 @showTool = (isActive) ->
