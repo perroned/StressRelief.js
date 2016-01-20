@@ -4,10 +4,12 @@
 
 body {
 	background-color: #000000;
+	/*extned the page to the entire window*/
 	margin: 0;
 	padding: 0;
 }
 
+/*some decoration around the drop zone*/
 .imageDrag {
 	border: 10px dashed aquamarine !important;
 }

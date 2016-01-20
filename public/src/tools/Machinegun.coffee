@@ -1,4 +1,21 @@
 class @Machinegun extends @Tool
+	shadowOffsetY = 40
+	shadowOffsetX = 25
+	damageScale = .45
+	jitterFlucuation = 7
+	shadowJitterFlucuation = 5
+	flashOffsetY = 5
+	flashOffsetX = 3
+	bulletScale = .7
+	iconOffsetY = 30
+	iconOffsetX = 10
+	bulletHorizontalTravel = 4
+	bulletFallRotate = .3
+	bulletSpawnInterval = 100
+	bulletMinDistance = 50
+	bulletMaxDistance = 150
+	bulletMaxHeight = 5000
+
 	constructor: (@name) ->
 		super @name
 		@bullets = []
@@ -28,31 +45,32 @@ class @Machinegun extends @Tool
 		@flash = PIXI.Sprite.fromImage("../images/tools/damage/machinegun_fire.png")
 		@flash.scale.x = @flash.scale.y = 1
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 		App.stage.addChild(@crosshairs)
 		App.stage.addChild(@flash)
 		super()
 
 	showShadow: (mCoords, offsetX, offsetY) ->
-		@shadow.position.y = mCoords.y+40+offsetY
-		@shadow.position.x = mCoords.x+25+offsetX
+		@shadow.position.y = mCoords.y + shadowOffsetY + offsetY
+		@shadow.position.x = mCoords.x + shadowOffsetX + offsetX
 
 	showTool: (isActive) ->
 		if isActive
 			mCoords = App.stage.getMousePosition()
 			offsetX = offsetY = 0
 			@flash.visible = false
+			# every frame while the tool is fired play its fire sound
 			if @isPressed()
 				App.sound.machinegun_shoot = new Howl({
 					urls: ['../sounds/machinegun_shoot.ogg']
 				}).play()
 
 				# produce random jitter for the bullet's location
-				offsetX = randNum(-7, 7)
-				offsetY = randNum(-7, 7)
+				offsetX = randNum(-jitterFlucuation, jitterFlucuation)
+				offsetY = randNum(-jitterFlucuation, jitterFlucuation)
 				damage = PIXI.Sprite.fromImage("../images/tools/damage/bulletDamage#{randNum(0,3)}.png")
-				damage.scale.x = damage.scale.y = .45
+				damage.scale.x = damage.scale.y = damageScale
 				damage.position.x = mCoords.x+offsetX
 				damage.position.y = mCoords.y+offsetY
 				@damages.push damage
@@ -61,30 +79,30 @@ class @Machinegun extends @Tool
 				App.tools[App.ToolEnum.EXPLODER].newExplosion(posX: damage.position.x, posY: damage.position.y, removeAfterDone: true, scaleX: 0.1, scaleY: 0.1, loop: false, animationSpeed: 1)
 
 				# produce random jitter for the gun and shadow while shooting
-				offsetX = randNum(-5, 5)
-				offsetY = randNum(-5, 5)
-				if (chances=randNum(0, 10)) > 4
-					@flash.position.y = mCoords.y+5+offsetY
-					@flash.position.x = mCoords.x-3+offsetX
+				offsetX = randNum(-shadowJitterFlucuation, shadowJitterFlucuation)
+				offsetY = randNum(-shadowJitterFlucuation, shadowJitterFlucuation)
+				if (randNum(0, 10) > 4) # 25% chance
+					@flash.position.y = mCoords.y + flashOffsetY + offsetY
+					@flash.position.x = mCoords.x - flashOffsetX + offsetX
 					@flash.visible = true
 
 				# spawn a bullet
-				if ((Date.now()-@lastBulletSpawn) > 100) or @lastBulletSpawn is 0
+				if ((Date.now() - @lastBulletSpawn) > bulletSpawnInterval) or @lastBulletSpawn is 0
 					@lastBulletSpawn = Date.now()
 					b = PIXI.Sprite.fromImage("../images/tools/damage/machinegunbullet.png")
-					b.scale.x = b.scale.y = .7
-					b.position.x = mCoords.x + @icon.width+5
-					b.position.y = mCoords.y + @icon.height+5
+					b.scale.x = b.scale.y = bulletScale
+					b.position.x = mCoords.x + @icon.width + flashOffsetY
+					b.position.y = mCoords.y + @icon.height + flashOffsetY
 					b.speed = 1
-					b.maxHeight = b.position.y - randNum(50,150)
+					b.maxHeight = b.position.y - randNum(bulletMinDistance, bulletMaxDistance)
 					@bullets.push b
 					App.pondContainer.addChild(b)
 
-			@icon.position.y = mCoords.y+30+offsetY
-			@icon.position.x = mCoords.x+10+offsetX
+			@icon.position.y = mCoords.y + iconOffsetY + offsetY
+			@icon.position.x = mCoords.x + iconOffsetX + offsetX
 			@showShadow(mCoords, offsetX, offsetY)
-			@crosshairs.position.y = mCoords.y - (@crosshairs.height/2)+offsetY
-			@crosshairs.position.x = mCoords.x - (@crosshairs.height/2)+offsetX
+			@crosshairs.position.y = mCoords.y - (@crosshairs.height / 2) + offsetY
+			@crosshairs.position.x = mCoords.x - (@crosshairs.height / 2) + offsetX
 
 		i = 0
 		while i < @bullets.length
@@ -92,16 +110,16 @@ class @Machinegun extends @Tool
 				@bullets[i].position.y -= 5 + -@bullets[i].speed
 				@bullets[i].speed -= .05
 			else
-				@bullets[i].position.y += 1+ @bullets[i].speed
+				@bullets[i].position.y += 1 + @bullets[i].speed
 				@bullets[i].speed += .1
-				@bullets[i].maxHeight=5000
+				@bullets[i].maxHeight = bulletMaxHeight
 
-			@bullets[i].position.x += 4
+			@bullets[i].position.x += bulletHorizontalTravel
 			@bullets[i].anchor.x = @bullets[i].anchor.y = .5
-			@bullets[i].rotation += .3
+			@bullets[i].rotation += bulletFallRotate
 			if @bullets[i].position.y > window.innerHeight
 				App.pondContainer.removeChild @bullets[i]
-				@bullets.splice(i,1)
+				@bullets.splice(i, 1)
 				App.sound.machinegun_bullet_land = new Howl({
 					urls: ['../sounds/machinegun_bullet_land.ogg']
 				}).play()

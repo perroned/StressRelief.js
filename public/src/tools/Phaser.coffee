@@ -42,7 +42,7 @@ class @Phaser extends @Tool
 		@phaserAction.anchor.x = @phaserAction.anchor.y = .5
 
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 		App.stage.addChild(@crosshairs)
 		App.stage.addChild(@flash)
@@ -50,19 +50,19 @@ class @Phaser extends @Tool
 		super()
 
 	showShadow: (mCoords) ->
-		@shadow.position.y = @icon.position.y+5
-		@shadow.position.x = @icon.position.x+@icon.width-5
+		@shadow.position.y = @icon.position.y + 5
+		@shadow.position.x = @icon.position.x + @icon.width - 5
 
 	showTool: (isActive) ->
 
 		if isActive
 			mCoords = App.stage.getMousePosition()
 			@flash.visible = false
-			@icon.position.y = mCoords.y+@shadow.height-5
-			@icon.position.x = mCoords.x+@shadow.width-5
+			@icon.position.y = mCoords.y + @shadow.height - 5
+			@icon.position.x = mCoords.x + @shadow.width - 5
 			@showShadow(mCoords)
-			@crosshairs.position.y = mCoords.y - (@crosshairs.height/2)
-			@crosshairs.position.x = mCoords.x - (@crosshairs.height/2)
+			@crosshairs.position.y = mCoords.y - (@crosshairs.height / 2)
+			@crosshairs.position.x = mCoords.x - (@crosshairs.height / 2)
 
 			if @finish > Date.now()
 				if @isPressed()

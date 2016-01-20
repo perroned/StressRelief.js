@@ -1,4 +1,7 @@
 class @Termites extends @Animator
+	termiteScale = 1.5
+	termiteRotation = 45
+
 	constructor: (@name) ->
 		App.sound.termite_noise = null
 		@directions = LEFT: 0, UP: 1, RIGHT: 2, DOWN: 3
@@ -36,7 +39,7 @@ class @Termites extends @Animator
 		App.pondContainer.removeChild(termite);
 		@termiteAnimator.animations.splice(i,1)
 		termite = PIXI.Sprite.fromImage("../images/tools/damage/termite_splat.png")
-		termite.scale.x = termite.scale.y = 1.5
+		termite.scale.x = termite.scale.y = termiteScale
 		termite.position.y = posY
 		termite.position.x = posX
 		@termiteSplats.push(termite)
@@ -61,10 +64,10 @@ class @Termites extends @Animator
 				termite.scale.x = -(Math.abs termite.scale.x)
 				termite.rotation = 0
 			when @directions.UP
-				termite.rotation = -(45 * (Math.PI / 2))
+				termite.rotation = -(termiteRotation * (Math.PI / 2))
 				termite.scale.x = Math.abs termite.scale.x
 			when @directions.DOWN
-				termite.rotation = (45 * (Math.PI / 2))
+				termite.rotation = (termiteRotation * (Math.PI / 2))
 				termite.scale.x = Math.abs termite.scale.x
 			when @directions.RIGHT
 				termite.scale.x = Math.abs termite.scale.x

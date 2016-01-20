@@ -1,5 +1,18 @@
 class @Flamethrower extends @Tool
 	@SHOOT_DISTANCE: 60
+	shadowOffsetY = 40
+	shadowOffsetX = 25
+	iconOffsetY = 30
+	iconOffsetX = 10
+	maxFireballs = 20
+	fireballScale = .15
+	fireballOffsetY = 25
+	fireballOffsetX = 5
+	fireballTurningSpeed = .8
+	fireballMinLifeTime = 4
+	fireballMaxLifeTime = 8
+	fireballScaleIncrease = 0.006
+	fireBurnTimeout = 2000
 
 	constructor: (@name) ->
 		super @name
@@ -27,34 +40,34 @@ class @Flamethrower extends @Tool
 		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/flamethrower.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 		super()
 
 	showShadow: (mCoords) ->
-		@shadow.position.y = mCoords.y+40
-		@shadow.position.x = mCoords.x+25
+		@shadow.position.y = mCoords.y + shadowOffsetY
+		@shadow.position.x = mCoords.x + shadowOffsetX
 
 	showTool: (isActive) ->
 		if isActive
 			mCoords = App.stage.getMousePosition()
-			@icon.position.y = mCoords.y+30
-			@icon.position.x = mCoords.x+10
+			@icon.position.y = mCoords.y + iconOffsetY
+			@icon.position.x = mCoords.x + iconOffsetX
 			@showShadow(mCoords)
 
 			if @isPressed()
 				# spawn a fireball every 20ms or immediately if there are none
-				if ((Date.now()-@lastFireballSpawn) > 20) or @lastFireballSpawn is 0
+				if ((Date.now()-@lastFireballSpawn) > maxFireballs) or @lastFireballSpawn is 0
 					@lastFireballSpawn = Date.now()
 					fireball = PIXI.Sprite.fromImage("../images/tools/damage/fireball.png")
-					fireball.scale.x = fireball.scale.y = .15
-					fireball.position.x = mCoords.x+5
-					fireball.position.y = mCoords.y+25
+					fireball.scale.x = fireball.scale.y = fireballScale
+					fireball.position.x = mCoords.x + fireballOffsetX
+					fireball.position.y = mCoords.y + fireballOffsetY
 					fireball.timeCreated = Date.now() # when it was created
-					fireball.lifetime = randNum(4,8)*1000 # how long it will last
+					fireball.lifetime = randNum(fireballMinLifeTime,fireballMaxLifeTime)*1000 # how long it will last
 					fireball.direction = Math.random() * Math.PI * 2
 					fireball.speed = .1
-					fireball.turnSpeed = Math.random() - 0.8
+					fireball.turnSpeed = Math.random() - fireballTurningSpeed
 					fireball.lastBurn = 0 # the last time a burn mark was drawn
 					fireball.startY = fireball.position.y
 					fireball.startX = fireball.position.x
@@ -78,7 +91,7 @@ class @Flamethrower extends @Tool
 				else
 					fireball.position.x -= 1
 					fireball.position.y -= 1
-					fireball.scale.x = fireball.scale.y += 0.006
+					fireball.scale.x = fireball.scale.y += fireballScaleIncrease
 
 			# animate the fire ball
 			fireball.direction += fireball.turnSpeed * 0.01
@@ -87,7 +100,7 @@ class @Flamethrower extends @Tool
 			fireball.rotation = randNum(1,6)/100
 
 			# draw a new burn mark for each fireball every 2 seconds
-			if fireball.landed and Date.now()-fireball.lastBurn > 2000
+			if fireball.landed and Date.now() - fireball.lastBurn > fireBurnTimeout
 				fireball.lastBurn = Date.now()
 				burn = PIXI.Sprite.fromImage("../images/tools/damage/fireburn#{randNum(0,2)}.png")
 				burn.scale.x = burn.scale.y = .5
@@ -101,12 +114,13 @@ class @Flamethrower extends @Tool
 				App.pondContainer.addChild fireball
 
 			# if the fireball has reached its life expectancy remove it
-			if Date.now()-fireball.timeCreated > fireball.lifetime
+			if Date.now() - fireball.timeCreated > fireball.lifetime
 				App.pondContainer.removeChild fireball
 				@fireballs.splice(i,1)
 
 			i++
 
+	# the sound the flamethrower makes while it is being used
 	sound_Spread: (start) ->
 		App.sound.flamethrower_spread?.stop()
 		if start
@@ -115,6 +129,7 @@ class @Flamethrower extends @Tool
 				loop: true
 			}).play()
 
+	# for dying fireballs
 	sound_Crackle: (start) ->
 		App.sound.flamethrower_crackle?.stop()
 		if start

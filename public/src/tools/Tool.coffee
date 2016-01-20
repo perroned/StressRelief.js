@@ -5,6 +5,7 @@ class @Tool
 		@icon = null
 		@pressed = false
 		@shadow = null
+		@shadowTint = 0x151515
 	actionStart: -> @pressed = true
 	actionFinish: -> @pressed = false
 	cleanUp: (additional) ->

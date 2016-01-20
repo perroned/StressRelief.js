@@ -29,6 +29,7 @@ html
 		script(type="text/javascript" src="src/Exploder.js")
 		script(type="text/javascript" src="src/tools/Termites.js")
 
+		//- add form submission handlers
 		script(type="text/javascript").
 			$(document).ready(function() {
 				$('#uploadForm').submit(function() {
@@ -41,17 +42,19 @@ html
 							uploadBackground("/file_upload?img="+response)
 						}
 					});
-					// Very important line, it disable the page refresh.
+					// Very important line, it disables the page refresh.
 					return false;
 				});
 			});
 
+			//- set up drag and drop on the form
 			function allowDrop(event) {
 				event.preventDefault();
 				$("#userPhoto").addClass("imageDrag");
 			}
 
 	body
+		//- initialize foundation
 		script(type="text/javascript").
 			$(document).foundation();
 

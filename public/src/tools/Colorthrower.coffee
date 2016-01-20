@@ -4,7 +4,14 @@ class @Colorthrower extends @Tool
 	@PAINT_BALL_MOVE_AMOUNT: 2 # how far the paint balls move
 	@PAINT_BALL_MOVE_INTERVAL: 10 # how often the paint balls move
 	@SHOOT_DISTANCE: 75 # how far the paint balls move before they explode
-
+	paintballInitialOffsetY = 20
+	shadowOffsetY = 10
+	shadowOffsetX = 50
+	iconOffsetY = 30
+	iconOffsetX = 10
+	splatterOffset = 15
+	paintballScaleSize = .4
+	
 	constructor: (@name) ->
 		super @name
 		@lastPaintBall = 0
@@ -30,7 +37,7 @@ class @Colorthrower extends @Tool
 		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/colorthrower.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 		super()
 
@@ -46,7 +53,7 @@ class @Colorthrower extends @Tool
 			mCoords = App.stage.getMousePosition()
 			paintBall.lastMove = 0
 			App.pondContainer.addChild(paintBall)
-			paintBall.startY = paintBall.position.y = mCoords.y+20
+			paintBall.startY = paintBall.position.y = mCoords.y + paintballInitialOffsetY
 			paintBall.startX = paintBall.position.x = mCoords.x
 			@paintBalls.push paintBall
 			App.sound.paint_shoot = new Howl({
@@ -55,13 +62,16 @@ class @Colorthrower extends @Tool
 			App.sound.who = "colorthrower"
 			@lastPaintBall = Date.now()
 
+	# transition from a moving paintball to a statically placed splatter
+	# and cue audio
 	makePaintSplatter: (i) ->
 		paintBall = @paintBalls[i]
 		# create a splatter based on the paint balls color and a random shape
 		splatter = PIXI.Sprite.fromImage("../images/tools/damage/colorSplats/coloredSplat_#{paintBall.color}_#{randNum(0,3)}.png")
-		splatter.scale.y = splatter.scale.x = .4 + randNum(-1, 2)/20
-		splatter.position.y = (paintBall.position.y+15) + randNum(-10,10)
-		splatter.position.x = (paintBall.position.x+15) + randNum(-10,10)
+		# randomly choose whether to scale up or down
+		splatter.scale.y = splatter.scale.x = paintballScaleSize + randNum(-1, 2) / paintballInitialOffsetY
+		splatter.position.y = (paintBall.position.y + splatterOffset) + randNum(-10,10)
+		splatter.position.x = (paintBall.position.x + splatterOffset) + randNum(-10,10)
 		splatter.anchor.y = splatter.anchor.x = .5
 		App.pondContainer.addChild splatter
 		splatter.rotation = Math.random() * Math.PI * 2
@@ -75,8 +85,8 @@ class @Colorthrower extends @Tool
 		}).play()
 
 	showShadow: (mCoords) ->
-		@shadow.position.y = @icon.position.y + 10
-		@shadow.position.x = @icon.position.x + 50
+		@shadow.position.y = @icon.position.y + shadowOffsetY
+		@shadow.position.x = @icon.position.x + shadowOffsetX
 
 	showTool: (isActive) ->
 		if isActive
@@ -84,10 +94,11 @@ class @Colorthrower extends @Tool
 				@makePaintBall()
 
 			mCoords = App.stage.getMousePosition()
-			@icon.position.y = mCoords.y+30
-			@icon.position.x = mCoords.x+10
+			@icon.position.y = mCoords.y + iconOffsetY
+			@icon.position.x = mCoords.x + iconOffsetX
 			@showShadow(mCoords)
 
+	# animate fired paintballs
 		i = 0
 		while i < @paintBalls.length
 			paintBall = @paintBalls[i]

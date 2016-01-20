@@ -1,4 +1,13 @@
 class @Stamper extends @Tool
+	damageOffsetY = 10
+	shadowOffsetInUse = 25
+	iconScaleX = .7
+	iconScaleY = .4
+	shadowRotation = 45
+	shadowOffsetY = 7
+	shadowOffsetX = 25
+	iconOffset = 20
+
 	constructor: (@name) ->
 		super @name
 		@damageIconCount = 10
@@ -9,14 +18,14 @@ class @Stamper extends @Tool
 		damage = PIXI.Sprite.fromImage("../images/tools/damage/stamps/stamp_#{randNum(0, @damageIconCount)}.png")
 		damage.scale.x = damage.scale.y = .5
 		mCoords = App.stage.getMousePosition()
-		damage.position.y = mCoords.y+@dropAmount+10
+		damage.position.y = mCoords.y + @dropAmount + damageOffsetY
 		damage.position.x = mCoords.x
 		App.tools[App.ToolEnum.TERMITES].termiteCheck(damage)
 		@damages.push damage
 		App.pondContainer.addChild damage
 		@icon.position.y = @icon.position.y + @dropAmount
 		@handleStampSound()
-		@shadow.position.x = mCoords.x+@icon.width+25-@dropAmount
+		@shadow.position.x = mCoords.x + @icon.width + shadowOffsetInUse - @dropAmount
 
 	actionFinish: ->
 		super()
@@ -31,29 +40,29 @@ class @Stamper extends @Tool
 	loadTool: ->
 		@icon = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
 		@icon.anchor.x = @icon.anchor.y = .5
-		@icon.scale.x = .7
-		@icon.scale.y = .4
+		@icon.scale.x = iconScaleX
+		@icon.scale.y = iconScaleY
 		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
-		@shadow.scale.x = .4
-		@shadow.scale.y = .7
+		@shadow.scale.x = iconScaleX
+		@shadow.scale.y = iconScaleY
 		@shadow.anchor.x = @shadow.anchor.y = .5
-		@shadow.rotation = 45 * Math.PI / 2
+		@shadow.rotation = shadowRotation * Math.PI / 2
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 		super()
 
 	showShadow: (mCoords) ->
-		@shadow.position.y = mCoords.y+@icon.height-7
-		@shadow.position.x = mCoords.x+@icon.width+25
+		@shadow.position.y = mCoords.y + @icon.height - shadowOffsetY
+		@shadow.position.x = mCoords.x + @icon.width + shadowOffsetX
 
 	showTool: (isActive) ->
 		return if not isActive
 
 		if not @isPressed()
 			mCoords = App.stage.getMousePosition()
-			@icon.position.y = mCoords.y+20
-			@icon.position.x = mCoords.x+20
+			@icon.position.y = mCoords.y + iconOffset
+			@icon.position.x = mCoords.x + iconOffset
 			@showShadow(mCoords)
 
 	switchOff: ->

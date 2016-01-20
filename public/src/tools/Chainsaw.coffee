@@ -1,4 +1,9 @@
 class @Chainsaw extends @Tool
+	termiteCheckZone = 10
+	shadowOffsetY = 20
+	shadowOffsetX = 25
+	cuttingVerticalOffset = 40
+	
 	constructor: (@name) ->
 		super @name
 		@cutIcon = null
@@ -6,7 +11,7 @@ class @Chainsaw extends @Tool
 	actionStart: ->
 		super()
 		mCoords = App.stage.getMousePosition()
-		App.tools[App.ToolEnum.TERMITES].termiteCheck({width:10,height:10, position: {x: mCoords.x, y:mCoords.y}})
+		App.tools[App.ToolEnum.TERMITES].termiteCheck({width:termiteCheckZone, height:termiteCheckZone, position: {x: mCoords.x, y:mCoords.y}})
 		@switchOff()
 		@sound_Rev false
 		@sound_Cut true
@@ -31,29 +36,30 @@ class @Chainsaw extends @Tool
 		@shadow.scale.x = @shadow.scale.y = .5
 		App.stage.addChild(@shadow)
 		# darken the color. Set 50% transparency
-		@shadow.tint = 0x151515
+		@shadow.tint = @shadowTint
 		@shadow.alpha = 0.5
 
 		@cutIcon = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw_cut.png")
 		mCoords = App.stage.getMousePosition()
-		@cutIcon.position.y = mCoords.y-40
+		@cutIcon.position.y = mCoords.y - cuttingVerticalOffset
 		@cutIcon.position.x = mCoords.x
 		@cutIcon.scale.x = @cutIcon.scale.y = .5
 		App.pondContainer.addChild @cutIcon
 
 	showShadow: (mCoords) ->
-		@shadow.position.y = mCoords.y+20
-		@shadow.position.x = mCoords.x+25
+		@shadow.position.y = mCoords.y + shadowOffsetY
+		@shadow.position.x = mCoords.x + shadowOffsetX
 
+	# if the tool is being used add a damage sprite
 	showTool: (isActive) ->
 		return if not isActive
 		if @isPressed()
 			mCoords = App.stage.getMousePosition()
-			@cutIcon.position.y = mCoords.y-40
+			@cutIcon.position.y = mCoords.y - cuttingVerticalOffset
 			@cutIcon.position.x = mCoords.x
 			# cutting
 			damage = PIXI.Sprite.fromImage("../images/tools/damage/chainsawDamage.png")
-			damage.scale.x = damage.scale.y = 2
+			damage.scale.x = damage.scale.y = 2 # make twice as big
 			damage.position.x = mCoords.x
 			damage.position.y = mCoords.y
 			@damages.push damage
@@ -64,6 +70,7 @@ class @Chainsaw extends @Tool
 			@icon.position.x = mCoords.x
 			@showShadow(mCoords)
 
+	# played only while cutting
 	sound_Cut: (start) ->
 		App.sound.chainsaw_cut?.stop()
 		if start
@@ -72,6 +79,7 @@ class @Chainsaw extends @Tool
 				loop: true
 			}).play()
 
+	# this sound is constantly playing
 	sound_Rev: (start) ->
 		App.sound.chainsaw_rev?.stop()
 		if start
