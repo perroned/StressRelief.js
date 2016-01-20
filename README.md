@@ -23,16 +23,8 @@ And draw on your image
 
 ---
 
-#####To run simply execute
+##### To run, execute
 
-
-<code>
-set DEBUG=StressRelief.js & npm start
-</code>
-
-and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in your web browser
-
-#####For development
 
 <code>
 set DEBUG=StressRelief.js & npm start
