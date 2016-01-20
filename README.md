@@ -18,6 +18,9 @@ You can also drag a picture or click choose file to browse your computer for an 
 
 ![](./resources/2.PNG)
 
+And draw on your image
+![](./resources/3.PNG)
+
 ---
 
 ##### To run simply execute
