@@ -52,7 +52,7 @@ class @Colorthrower extends @Tool
 			paintBall.scale.x = paintBall.scale.y = .5
 			mCoords = App.stage.getMousePosition()
 			paintBall.lastMove = 0
-			App.pondContainer.addChild(paintBall)
+			App.mainContainer.addChild(paintBall)
 			paintBall.startY = paintBall.position.y = mCoords.y + paintballInitialOffsetY
 			paintBall.startX = paintBall.position.x = mCoords.x
 			@paintBalls.push paintBall
@@ -73,11 +73,11 @@ class @Colorthrower extends @Tool
 		splatter.position.y = (paintBall.position.y + splatterOffset) + randNum(-10,10)
 		splatter.position.x = (paintBall.position.x + splatterOffset) + randNum(-10,10)
 		splatter.anchor.y = splatter.anchor.x = .5
-		App.pondContainer.addChild splatter
+		App.mainContainer.addChild splatter
 		splatter.rotation = Math.random() * Math.PI * 2
 		@paintSplats.push splatter
 		App.tools[App.ToolEnum.TERMITES].termiteCheck(splatter)
-		App.pondContainer.removeChild paintBall
+		App.mainContainer.removeChild paintBall
 		@paintBalls.splice(i,1)
 
 		App.sound.paint_splatter = new Howl({

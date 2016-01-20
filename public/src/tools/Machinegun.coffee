@@ -75,7 +75,7 @@ class @Machinegun extends @Tool
 				damage.position.y = mCoords.y+offsetY
 				@damages.push damage
 				App.tools[App.ToolEnum.TERMITES].termiteCheck(damage)
-				App.pondContainer.addChild(damage)
+				App.mainContainer.addChild(damage)
 				App.tools[App.ToolEnum.EXPLODER].newExplosion(posX: damage.position.x, posY: damage.position.y, removeAfterDone: true, scaleX: 0.1, scaleY: 0.1, loop: false, animationSpeed: 1)
 
 				# produce random jitter for the gun and shadow while shooting
@@ -96,7 +96,7 @@ class @Machinegun extends @Tool
 					b.speed = 1
 					b.maxHeight = b.position.y - randNum(bulletMinDistance, bulletMaxDistance)
 					@bullets.push b
-					App.pondContainer.addChild(b)
+					App.mainContainer.addChild(b)
 
 			@icon.position.y = mCoords.y + iconOffsetY + offsetY
 			@icon.position.x = mCoords.x + iconOffsetX + offsetX
@@ -118,7 +118,7 @@ class @Machinegun extends @Tool
 			@bullets[i].anchor.x = @bullets[i].anchor.y = .5
 			@bullets[i].rotation += bulletFallRotate
 			if @bullets[i].position.y > window.innerHeight
-				App.pondContainer.removeChild @bullets[i]
+				App.mainContainer.removeChild @bullets[i]
 				@bullets.splice(i, 1)
 				App.sound.machinegun_bullet_land = new Howl({
 					urls: ['../sounds/machinegun_bullet_land.ogg']

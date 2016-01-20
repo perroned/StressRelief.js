@@ -22,7 +22,7 @@ class @Stamper extends @Tool
 		damage.position.x = mCoords.x
 		App.tools[App.ToolEnum.TERMITES].termiteCheck(damage)
 		@damages.push damage
-		App.pondContainer.addChild damage
+		App.mainContainer.addChild damage
 		@icon.position.y = @icon.position.y + @dropAmount
 		@handleStampSound()
 		@shadow.position.x = mCoords.x + @icon.width + shadowOffsetInUse - @dropAmount

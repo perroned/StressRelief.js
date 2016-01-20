@@ -46,7 +46,7 @@ class @Animator extends @Tool
 		animation.scale.x = config.scaleX
 		animation.scale.y = config.scaleY
 		animation.gotoAndPlay(0);
-		App.pondContainer.addChild(animation);
+		App.mainContainer.addChild(animation);
 		animation.loop = config.loop
 		animation.animationSpeed = config.animationSpeed
 		animation.removeAfterDone = config.removeAfterDone
@@ -63,7 +63,7 @@ class @Animator extends @Tool
 		while i < @animations.length
 			if not @animations[i].playing
 				if @animations[i].removeAfterDone
-					App.pondContainer.removeChild(@animations[i]);
+					App.mainContainer.removeChild(@animations[i]);
 					@animations.splice(i,1)
 			i++
 

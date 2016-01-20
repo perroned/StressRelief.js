@@ -74,7 +74,7 @@ class @Phaser extends @Tool
 					damage.rotation = Math.random() * Math.PI / 2
 					damage.alpha = .1
 					@damages.push damage
-					App.pondContainer.addChild(damage)
+					App.mainContainer.addChild(damage)
 					@flash.position.y = mCoords.y
 					@flash.position.x = mCoords.x-2
 					@flash.visible = true

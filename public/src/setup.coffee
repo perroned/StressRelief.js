@@ -13,12 +13,12 @@
 	# create an new instance of a pixi stage
 	App.stage = new (PIXI.Stage)(0xFFFFFF, true)
 	setupHitbox()
-	App.pondContainer = new (PIXI.DisplayObjectContainer)
-	App.stage.addChild App.pondContainer
+	App.mainContainer = new (PIXI.DisplayObjectContainer)
+	App.stage.addChild App.mainContainer
 	App.stage.interactive = true
 	App.backgroundColor = PIXI.Sprite.fromImage('../images/backgroundColors/default.png')
 	App.currentBackgroundColor = 'default'
-	App.pondContainer.addChild App.backgroundColor
+	App.mainContainer.addChild App.backgroundColor
 	App.trueBackgroundImage = {}
 	uploadBackground('../images/displacement_BG.jpg')
 	uploadBackgroundColor App.backgroundColor
@@ -62,20 +62,20 @@
 	window.addEventListener('resize', resize, false)
 
 @uploadBackground = (path) ->
-	(App.pondContainer.removeChild App.backgroundImage) if App.backgroundImage?
+	(App.mainContainer.removeChild App.backgroundImage) if App.backgroundImage?
 	App.backgroundImage = PIXI.Sprite.fromImage(path)
 	if App.backgroundImage.texture.baseTexture.hasLoaded
 		[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
-		App.pondContainer.addChildAt App.backgroundImage, 1
+		App.mainContainer.addChildAt App.backgroundImage, 1
 		resize()
 	else
 		App.backgroundImage.texture.baseTexture.on 'loaded', ->
 			[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
-			App.pondContainer.addChildAt App.backgroundImage, 1
+			App.mainContainer.addChildAt App.backgroundImage, 1
 			resize()
 
 @uploadBackgroundColor = (img) ->
-	App.pondContainer.removeChild App.backgroundColor
+	App.mainContainer.removeChild App.backgroundColor
 	App.backgroundColor = img
-	App.pondContainer.addChildAt App.backgroundColor, 0
+	App.mainContainer.addChildAt App.backgroundColor, 0
 	resize()

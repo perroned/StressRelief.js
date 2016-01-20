@@ -44,7 +44,7 @@ class @Chainsaw extends @Tool
 		@cutIcon.position.y = mCoords.y - cuttingVerticalOffset
 		@cutIcon.position.x = mCoords.x
 		@cutIcon.scale.x = @cutIcon.scale.y = .5
-		App.pondContainer.addChild @cutIcon
+		App.mainContainer.addChild @cutIcon
 
 	showShadow: (mCoords) ->
 		@shadow.position.y = mCoords.y + shadowOffsetY
@@ -63,7 +63,7 @@ class @Chainsaw extends @Tool
 			damage.position.x = mCoords.x
 			damage.position.y = mCoords.y
 			@damages.push damage
-			App.pondContainer.addChild(damage)
+			App.mainContainer.addChild(damage)
 		else
 			mCoords = App.stage.getMousePosition()
 			@icon.position.y = mCoords.y
@@ -98,5 +98,5 @@ class @Chainsaw extends @Tool
 		super()
 		@sound_Cut false
 		@sound_Rev true
-		App.pondContainer.removeChild @cutIcon
-		App.pondContainer.addChild @cutIcon
+		App.mainContainer.removeChild @cutIcon
+		App.mainContainer.addChild @cutIcon

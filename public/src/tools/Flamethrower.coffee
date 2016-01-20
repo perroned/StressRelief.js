@@ -73,7 +73,7 @@ class @Flamethrower extends @Tool
 					fireball.startX = fireball.position.x
 					fireball.landed = false
 					@fireballs.push fireball
-					App.pondContainer.addChild(fireball)
+					App.mainContainer.addChild(fireball)
 
 		# if there are no more flames stop the audio
 		if @fireballs.length is 0
@@ -108,14 +108,14 @@ class @Flamethrower extends @Tool
 				burn.position.y = fireball.position.y
 				burn.alpha = .5
 				@damages.push burn
-				App.pondContainer.addChild(burn)
+				App.mainContainer.addChild(burn)
 				# keep the fireballs on top of the burns
-				App.pondContainer.removeChild fireball
-				App.pondContainer.addChild fireball
+				App.mainContainer.removeChild fireball
+				App.mainContainer.addChild fireball
 
 			# if the fireball has reached its life expectancy remove it
 			if Date.now() - fireball.timeCreated > fireball.lifetime
-				App.pondContainer.removeChild fireball
+				App.mainContainer.removeChild fireball
 				@fireballs.splice(i,1)
 
 			i++

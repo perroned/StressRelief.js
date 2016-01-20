@@ -28,7 +28,7 @@ class @Hammer extends @Tool
 		damage.anchor.x = damage.anchor.y = .5
 		damage.rotation = Math.random() * 360
 		@damages.push damage
-		App.pondContainer.addChild damage
+		App.mainContainer.addChild damage
 		@icon.rotation =	@shadow.rotation = -iconAngle
 		@icon.position.x = @icon.position.x - iconOffsetX
 		@shadow.position.y = @icon.position.y - shadowOffsetY

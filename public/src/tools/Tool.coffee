@@ -14,7 +14,7 @@ class @Tool
 		for d in ([@damages].concat additional)
 			i = 0
 			while i < d.length
-				App.pondContainer.removeChild d[i]
+				App.mainContainer.removeChild d[i]
 				i++
 		@damages = []
 		[]

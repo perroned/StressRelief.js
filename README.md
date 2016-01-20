@@ -34,7 +34,8 @@ and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in
 
 ```
 set DEBUG=StressRelief.js & npm start
-coffee --watch --compile <directory>```
+coffee --watch --compile <directory>
+```
 
 and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in your web browser
 

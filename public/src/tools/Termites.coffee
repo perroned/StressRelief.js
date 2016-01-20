@@ -36,14 +36,14 @@ class @Termites extends @Animator
 		termite = @termiteAnimator.animations[i]
 		posX = termite.position.x
 		posY = termite.position.y
-		App.pondContainer.removeChild(termite);
+		App.mainContainer.removeChild(termite);
 		@termiteAnimator.animations.splice(i,1)
 		termite = PIXI.Sprite.fromImage("../images/tools/damage/termite_splat.png")
 		termite.scale.x = termite.scale.y = termiteScale
 		termite.position.y = posY
 		termite.position.x = posX
 		@termiteSplats.push(termite)
-		App.pondContainer.addChild(termite);
+		App.mainContainer.addChild(termite);
 
 	loadTool: ->
 		super()
