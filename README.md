@@ -23,19 +23,24 @@ And draw on your image
 
 ---
 
-##### To run simply execute
+To run simply execute
 
-```
-set DEBUG=StressRelief.js & npm start```
+
+<code>
+set DEBUG=StressRelief.js & npm start
+</code>
 
 and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in your web browser
 
-##### For development
+For development
 
-```
+<code>
 set DEBUG=StressRelief.js & npm start
+</code>
+
+<code>
 coffee --watch --compile <directory>
-```
+</code>
 
 and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in your web browser
 
