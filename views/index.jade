@@ -33,24 +33,30 @@ html
 		script(type="text/javascript").
 			$(document).ready(function() {
 				$('#uploadForm').submit(function() {
+					//- disable closing while an image is processing
 					window.App.receivingImage = true;
 					$(this).ajaxSubmit({
 						error: function(xhr) {
-							status('Error: ' + xhr.status);
+							console.error('Error: ' + xhr.status);
 						},
 						success: function(response) {
 							uploadBackground("/file_upload?img=" + response, function() {
+								//- image downloaded. Allow modal closing
 								window.App.receivingImage = false;
+								//- close modal
 								$('#optionsModal').foundation('reveal', 'close');
+								//- reset title
 								$("#uploaderTitle").html("Drag an Image into the box below!");
 							});
 						},
 						uploadProgress: function(e) {
+							//- update screen with upload progress
 							if (e.lengthComputable) {
 								var total = e.total, current = e.loaded;
 								var percent = ((current * 100) / total).toFixed(2);
 								$("#uploaderTitle").html("Uploading image " + percent + "%");
 								if (percent >= 100) {
+									//- the image is uploaded. and will now be downloaded and applied
 									$("#uploaderTitle").html("Applying image...");
 								}
 							}
