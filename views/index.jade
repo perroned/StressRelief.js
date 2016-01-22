@@ -59,6 +59,7 @@ html
 		//- initialize foundation
 		script(type="text/javascript").
 			$(document).foundation();
+			Foundation.libs.reveal.settings.close_on_background_click = false;
 
 		div.
 			<div id="ToolsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
@@ -67,7 +68,7 @@ html
 				<p><a href="#" id="optionsModalButton" data-reveal-id="optionsModal" class="secondary button">Options</a></p>
 				<a id="saveImageButton">Save to image...</a>
 			</div>
-			<div id="optionsModal" class="reveal-modal" data-reveal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog" data-options="close_on_background_click:false;">
+			<div id="optionsModal" class="reveal-modal" data-reveal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
 				<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 				<h2 id="firstModalTitle">Options</h2><hr/>
 				<h3 id="firstModalTitle">Choose a color</h3>
