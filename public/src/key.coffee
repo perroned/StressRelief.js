@@ -34,7 +34,7 @@ App.keyboard = (keyCode) ->
 App.registerKeys = ->
 	# escape key
 	App.keyboard(27).release = ->
-		if not $("#optionsModal").is(":visible")
+		if (not window.App.receivingImage) and (not $("#optionsModal").is(":visible"))
 			$('#ToolsModal').foundation('reveal', ("close" if $("#ToolsModal").is(":visible")) or "open")
 
 	# 1

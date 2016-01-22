@@ -33,13 +33,15 @@ html
 		script(type="text/javascript").
 			$(document).ready(function() {
 				$('#uploadForm').submit(function() {
-					$('#optionsModal').foundation('reveal', 'close');
+					window.App.receivingImage = true;
 					$(this).ajaxSubmit({
 						error: function(xhr) {
 							status('Error: ' + xhr.status);
 						},
 						success: function(response) {
-							uploadBackground("/file_upload?img="+response)
+							uploadBackground("/file_upload?img="+response);
+							window.App.receivingImage = false;
+							$('#optionsModal').foundation('reveal', 'close');
 						}
 					});
 					// Very important line, it disables the page refresh.
@@ -65,7 +67,7 @@ html
 				<p><a href="#" id="optionsModalButton" data-reveal-id="optionsModal" class="secondary button">Options</a></p>
 				<a id="saveImageButton">Save to image...</a>
 			</div>
-			<div id="optionsModal" class="reveal-modal" data-reveal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog">
+			<div id="optionsModal" class="reveal-modal" data-reveal aria-labelledby="secondModalTitle" aria-hidden="true" role="dialog" data-options="close_on_background_click:false;">
 				<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 				<h2 id="firstModalTitle">Options</h2><hr/>
 				<h3 id="firstModalTitle">Choose a color</h3>
