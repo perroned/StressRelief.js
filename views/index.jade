@@ -78,7 +78,21 @@ html
 		script(type="text/javascript").
 			$(document).foundation();
 			Foundation.libs.reveal.settings.close_on_background_click = false;
+			
+			$(document).on('open.fndtn.reveal', '#ToolsModal[data-reveal]', function () {
+				$("#banner").show();
+			});
+			$(document).on('close.fndtn.reveal', '#ToolsModal[data-reveal]', function () {
+				$("#banner").hide();
+			});
+			$(document).on('close.fndtn.reveal', '#optionsModal[data-reveal]', function () {
+				$("#banner").hide();
+			});
 
+		#banner
+			a(href='https://github.com/perroned/StressRelief.js' target="_blank") Stress Relief
+			<span> - </span>
+			a(href='https://github.com/perroned/' target="_blank") Written by Dan Perrone
 		div.
 			<div id="ToolsModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 				<div id="ToolsMenuContainer"><table id="ToolsMenu"></table></div>

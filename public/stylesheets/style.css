@@ -2,6 +2,27 @@
 	margin-top: 15px;
 }
 
+#banner {
+	background-color: white;
+	border-radius: 10px;
+	font-size: 24px;
+	height: 40px;
+	left: 0;
+	line-height: 40px;
+	margin: 0 auto;
+	min-width: 435px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 30px;
+	width: 60%;
+	z-index: 1005; /* on top of foundation modals */
+}
+
+#banner a {
+	text-decoration: underline !important;
+}
+
 body {
 	background-color: #000000;
 	/*extned the page to the entire window*/
