@@ -29,11 +29,7 @@ And draw on your image
 
 
 <code>
-set DEBUG=StressRelief.js & npm start
-</code>
-
-<code>
-coffee --watch --compile <directory>
+./deploy.sh
 </code>
 
 and visit <a href="http://localhost:3000" target="\_blank">localhost:3000</a> in your web browser
