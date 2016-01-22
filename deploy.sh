@@ -1,2 +1,2 @@
-coffee --compile ../
+coffee --compile .
 node ./bin/www
