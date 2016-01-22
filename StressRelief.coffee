@@ -24,7 +24,7 @@ app.use '/', routes
 app.use '/file_upload', file_upload
 
 app.use multer(
-	dest: './uploads/'
+	dest: '/tmp'
 	rename: (fieldname, filename) ->
 		filename + Date.now()
 	onFileUploadStart: (file) ->
