@@ -20,7 +20,7 @@
 	App.currentBackgroundColor = 'default'
 	App.mainContainer.addChild App.backgroundColor
 	App.trueBackgroundImage = {}
-	uploadBackground('../images/displacement_BG.jpg')
+	uploadBackground('../images/bg.png')
 	uploadBackgroundColor App.backgroundColor
 
 @resize = ->
