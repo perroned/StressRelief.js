@@ -39,9 +39,21 @@ html
 							status('Error: ' + xhr.status);
 						},
 						success: function(response) {
-							uploadBackground("/file_upload?img="+response);
-							window.App.receivingImage = false;
-							$('#optionsModal').foundation('reveal', 'close');
+							uploadBackground("/file_upload?img=" + response, function() {
+								window.App.receivingImage = false;
+								$('#optionsModal').foundation('reveal', 'close');
+								$("#uploaderTitle").html("Drag an Image into the box below!");
+							});
+						},
+						uploadProgress: function(e) {
+							if (e.lengthComputable) {
+								var total = e.total, current = e.loaded;
+								var percent = ((current * 100) / total).toFixed(2);
+								$("#uploaderTitle").html("Uploading image " + percent + "%");
+								if (percent >= 100) {
+									$("#uploaderTitle").html("Applying image...");
+								}
+							}
 						}
 					});
 					// Very important line, it disables the page refresh.
@@ -80,7 +92,7 @@ html
 						<table id="imageUploadControls">
 							<tr>
 								<td>
-									<label><span>Drag an Image into the box below!</span>
+									<label><span id="uploaderTitle">Drag an Image into the box below!</span>
 										<input type="file" id="userPhoto" name="userPhoto" ondragover="allowDrop(event)"	/>
 									</label>
 								</td>

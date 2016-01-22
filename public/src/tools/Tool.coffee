@@ -107,10 +107,7 @@ class @Tool
 	$(document).on 'close.fndtn.reveal', '[data-reveal]', ->
 		if $(@)[0].id is "optionsModal"
 			uploadBackgroundColor App.backgroundColorImages[App.currentBackgroundColor]
-
-	$("#uploadImage").click ->
-		uploadBackground($("#imgURLBox").val())
-
+	
 @setupToolsMenu = ->
 	i = 0
 	el = ''

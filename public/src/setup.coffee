@@ -61,18 +61,20 @@
 	document.body.appendChild App.renderer.view
 	window.addEventListener('resize', resize, false)
 
-@uploadBackground = (path) ->
+@uploadBackground = (path, callback) ->
 	(App.mainContainer.removeChild App.backgroundImage) if App.backgroundImage?
 	App.backgroundImage = PIXI.Sprite.fromImage(path)
 	if App.backgroundImage.texture.baseTexture.hasLoaded
 		[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
 		App.mainContainer.addChildAt App.backgroundImage, 1
 		resize()
+		callback?()
 	else
 		App.backgroundImage.texture.baseTexture.on 'loaded', ->
 			[App.trueBackgroundImage.width, App.trueBackgroundImage.height] = [App.backgroundImage.texture.width, App.backgroundImage.texture.height]
 			App.mainContainer.addChildAt App.backgroundImage, 1
 			resize()
+			callback?()
 
 @uploadBackgroundColor = (img) ->
 	App.mainContainer.removeChild App.backgroundColor
