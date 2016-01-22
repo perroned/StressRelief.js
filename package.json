@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "deploy": "deploy.sh"
+    "start": "deploy.sh"
   },
   "dependencies": {
     "body-parser": "~1.12.4",
