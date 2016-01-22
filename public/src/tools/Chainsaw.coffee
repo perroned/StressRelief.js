@@ -28,11 +28,11 @@ class @Chainsaw extends @Tool
 		super()
 
 	loadTool: ->
-		@icon = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw.png")
+		@icon = PIXI.Sprite.fromImage("../images/tools/tools/Chainsaw.png")
 		@icon.scale.x = @icon.scale.y = .5
 		App.stage.addChild(@icon)
 
-		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/chainsaw.png")
+		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/Chainsaw.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		App.stage.addChild(@shadow)
 		# darken the color. Set 50% transparency

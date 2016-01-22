@@ -35,9 +35,9 @@ class @Flamethrower extends @Tool
 		@sound_Crackle false
 
 	loadTool: ->
-		@icon = PIXI.Sprite.fromImage("../images/tools/tools/flamethrower.png")
+		@icon = PIXI.Sprite.fromImage("../images/tools/tools/Flamethrower.png")
 		@icon.scale.x = @icon.scale.y = .5
-		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/flamethrower.png")
+		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/Flamethrower.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		# darken the color. Set 50% transparency
 		@shadow.tint = @shadowTint

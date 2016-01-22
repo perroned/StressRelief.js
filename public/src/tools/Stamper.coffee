@@ -38,11 +38,11 @@ class @Stamper extends @Tool
 		App.sound.stamper = new Howl({urls: ['../sounds/stamper.ogg']}).play()
 
 	loadTool: ->
-		@icon = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
+		@icon = PIXI.Sprite.fromImage("../images/tools/tools/Stamper.png")
 		@icon.anchor.x = @icon.anchor.y = .5
 		@icon.scale.x = iconScaleX
 		@icon.scale.y = iconScaleY
-		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/stamper.png")
+		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/Stamper.png")
 		@shadow.scale.x = iconScaleX
 		@shadow.scale.y = iconScaleY
 		@shadow.anchor.x = @shadow.anchor.y = .5

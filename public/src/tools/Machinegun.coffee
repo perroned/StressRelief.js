@@ -36,9 +36,9 @@ class @Machinegun extends @Tool
 		@bullets = super([@bullets])
 
 	loadTool: ->
-		@icon = PIXI.Sprite.fromImage("../images/tools/tools/machinegun.png")
+		@icon = PIXI.Sprite.fromImage("../images/tools/tools/Machinegun.png")
 		@icon.scale.x = @icon.scale.y = .5
-		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/machinegun.png")
+		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/Machinegun.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		@crosshairs = PIXI.Sprite.fromImage("../images/tools/damage/machinegun_crosshairs2.png")
 		@crosshairs.scale.x = @crosshairs.scale.y = .1

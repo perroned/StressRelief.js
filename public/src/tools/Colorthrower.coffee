@@ -32,9 +32,9 @@ class @Colorthrower extends @Tool
 		@paintBalls = []
 
 	loadTool: ->
-		@icon = PIXI.Sprite.fromImage("../images/tools/tools/colorthrower.png")
+		@icon = PIXI.Sprite.fromImage("../images/tools/tools/Colorthrower.png")
 		@icon.scale.x = @icon.scale.y = .5
-		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/colorthrower.png")
+		@shadow = PIXI.Sprite.fromImage("../images/tools/tools/Colorthrower.png")
 		@shadow.scale.x = @shadow.scale.y = .5
 		# darken the color. Set 50% transparency
 		@shadow.tint = @shadowTint
