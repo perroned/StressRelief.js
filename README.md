@@ -1,4 +1,4 @@
-# <a href="http://stress-relief.heroku.com/" target="\_blank">Live Demo</a>
+# <a href="https://stress-relief.herokuapp.com" target="\_blank">Live Demo</a>
 
 Stress Relief is a responsive CoffeeScript app written using the graphical library PIXI.js. Stress Relief allows users to upload images and decorate the image with a variety of interactive tools. 
 
